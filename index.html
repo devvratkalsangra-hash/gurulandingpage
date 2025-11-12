@@ -31,6 +31,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Alice&family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
         :root {
             --primary-color: #d35400;
@@ -65,29 +66,17 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smoother transition */
             text-decoration: none;
-            position: relative; /* For the shine effect */
-            overflow: hidden;   /* To contain the shine */
             display: flex;
             align-items: center;
             gap: 8px; /* Space between icon and text */
+            animation: scrollOpenClose 3s infinite ease-in-out;
         }
-
-        #order-now-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -75%;
-            width: 50%;
-            height: 100%;
-            background: linear-gradient( to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0) 100% );
-            transform: skewX(-25deg);
-            animation: shine 4s infinite;
-        }
-
 
         #order-now-btn:hover {
             transform: scale(1.1);
             box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+            animation-play-state: paused;
+            clip-path: inset(0 0 0 0);
         }
         
         /* --- Language Toggle Button --- */
@@ -162,10 +151,21 @@
 
         /* --- Header --- */
         header {
-            padding: 100px 20px 0; /* Increased top padding to push content below the new top-bar */
+            padding: 100px 20px 0; /* Adjust top padding */
             display: flex;
             flex-direction: column;
             align-items: center;
+            min-height: 200px; /* Ensure enough space for animation */
+        }
+
+        #namaste-icon {
+            width: 100px; /* Adjust size as needed */
+            height: auto;
+            margin-bottom: 20px; /* Space between icon and H1 */
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.5s forwards ease-out;
+            animation-delay: 0.1s; /* Appear slightly before first word */
         }
 
         h1 {
@@ -174,33 +174,52 @@
             color: var(--primary-color);
             margin: 0 0 10px;
             font-weight: 700;
-            display: flex;
+            display: flex; /* Keep flex for potential future use, but spans handle layout now */
             justify-content: center;
             align-items: center;
-            gap: 20px;
+            gap: 15px; /* Spacing between words */
+            flex-wrap: wrap; /* Allow words to wrap if needed */
         }
 
+        /* Span styles for H1 animation */
+        h1 span {
+            opacity: 0;
+            transform: translateY(20px);
+            display: inline-block; /* Needed for transform */
+            animation: fadeInUp 0.5s forwards ease-out;
+        }
+
+        /* Subtitle animation */
         .subtitle {
             font-size: 1.1rem;
             font-weight: 500;
             color: #7a5e43;
             margin: 0;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.5s forwards ease-out;
+            animation-delay: 2.0s; /* Delay after last word of h1 */
         }
 
         /* --- Animations --- */
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-
+       
         @keyframes popIn {
             from { opacity: 0; transform: scale(0.8); }
             to { opacity: 1; transform: scale(1); }
         }
 
-        @keyframes shine {
-            100% {
-                left: 125%;
+        @keyframes scrollOpenClose {
+            0%, 100% {
+                clip-path: inset(0 100% 0 0);
+            }
+            40%, 60% {
+                clip-path: inset(0 0 0 0);
             }
         }
 
@@ -208,13 +227,42 @@
             from { opacity: 0; }
             to { opacity: 1; }
         }
+       
+        @keyframes slideInLeft {
+             from { transform: translateX(-50px); opacity: 0; } 
+             to { transform: translateX(0); opacity: 1; } 
+        }
+        @keyframes slideInRight { 
+            from { transform: translateX(50px); opacity: 0; } 
+            to { transform: translateX(0); opacity: 1; } 
+        }
+        @keyframes rotateIn { 
+            from { transform: rotate(0deg); } 
+            to { transform: rotate(360deg); } 
+        }
 
-        /* Scroll Animations */
+
+        /* Scroll Animations (Keep for other sections) */
         .hidden {
             opacity: 0;
             transform: translateY(30px);
             transition: opacity 0.8s ease-out, transform 0.8s ease-out;
         }
+       /* Ensure cards are initially hidden and transformed correctly ONLY on mobile */
+       @media (max-width: 768px) {
+           .explore-section.hidden .container .card {
+               opacity: 0;
+               transform: translateY(0); /* Override default hidden transform */
+               transition: none; /* Disable default transition */
+           }
+            .explore-section.hidden .container .card:nth-child(odd) {
+                transform: translateX(-50px);
+            }
+            .explore-section.hidden .container .card:nth-child(even) {
+                 transform: translateX(50px);
+            }
+       }
+
 
         .visible {
             opacity: 1;
@@ -230,6 +278,7 @@
         .section {
             max-width: 1100px;
             margin: 40px auto;
+            position: relative; /* Needed for positioning 3D canvas */
         }
 
         h2.section-title {
@@ -257,12 +306,43 @@
         }
         
         /* --- About Us Section --- */
+        .about-us-wrapper {
+             position: relative; /* Container for canvas and content */
+        }
+        .about-us {
+            position: relative; /* Ensure it stays above the canvas */
+            z-index: 1;
+            padding: 20px; /* Add some padding if needed */
+            background-color: rgba(255, 250, 240, 0.8); /* Slightly transparent background */
+            border-radius: 15px;
+        }
         .about-us p {
             max-width: 700px;
             margin: 0 auto;
             line-height: 1.8;
             font-size: 1rem;
         }
+
+        /* --- 3D Background Canvas --- */
+        #threejs-canvas-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0; /* Behind the content */
+            pointer-events: none; /* Allow clicks to pass through */
+            overflow: hidden;
+            border-radius: 15px; /* Match the content background */
+        }
+        
+        #threejs-canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+
         
         /* --- Featured Products Section --- */
         .product-slider-container {
@@ -300,6 +380,7 @@
             text-align: center;
             padding-bottom: 25px;
             transition: transform 0.3s ease;
+            flex-shrink: 0; /* Ensure cards don't shrink */
         }
 
         .product-card:hover {
@@ -993,7 +1074,8 @@
 
         /* --- Responsive Design --- */
         @media (max-width: 768px) {
-            h1 { font-size: 3rem; }
+            #namaste-icon { width: 80px; margin-bottom: 15px; }
+            h1 { font-size: 3rem; gap: 10px;} /* Reduce gap on mobile */
             h2.section-title { font-size: 1.8rem; }
             footer {
                 flex-direction: column;
@@ -1029,6 +1111,17 @@
                 bottom: 90px;
                 width: auto;
             }
+            
+             /* Apply mobile card animations */
+            .explore-section.visible .container .card:nth-child(odd) {
+                animation: slideInLeft 0.8s ease-out forwards;
+            }
+            .explore-section.visible .container .card:nth-child(even) {
+                animation: slideInRight 0.8s ease-out forwards;
+            }
+            .explore-section.visible .container .card .icon {
+                 animation: rotateIn 1s ease-out 0.2s forwards; /* Delay rotation slightly */
+            }
         }
 
         @media (max-width: 420px) { /* Target smaller mobile screens */
@@ -1058,6 +1151,10 @@
                 justify-self: end;
             }
 
+            #namaste-icon { width: 60px; margin-bottom: 10px;}
+            h1 { font-size: 2.5rem; gap: 8px;} /* Further reduce size and gap */
+            .subtitle { font-size: 1rem; }
+
         }
 
     </style>
@@ -1071,25 +1168,36 @@
         <button id="lang-toggle">हिन्दी</button>
     </div>
 
-    <header class="hidden">
-        <h1 data-lang-en="Welcome to Guru Sampoorna" data-lang-hi="गुरु सम्पूर्ण में आपका स्वागत है">Welcome to Guru Sampoorna</h1>
+    <header>
+        <img src="https://i.postimg.cc/9FhNkZnH/png-transparent-namaste-computer-icons-hand-prayer-hand-orange-desktop-wallpaper-thumbnail-removebg.png" alt="Namaste Icon" id="namaste-icon">
+        <h1>
+             <!-- Wrap each word in a span with a delay --><span data-lang-en="Welcome" data-lang-hi="गुरु" style="animation-delay: 0.2s;">Welcome</span>
+            <span data-lang-en="to" data-lang-hi="सम्पूर्ण" style="animation-delay: 0.6s;">to</span>
+            <span data-lang-en="Guru" data-lang-hi="में" style="animation-delay: 1.0s;">Guru</span>
+            <span data-lang-en="Sampoorna" data-lang-hi="आपका" style="animation-delay: 1.4s;">Sampoorna</span>
+             <!-- Note: Hindi structure is different, adjust spans accordingly if needed --></h1>
         <p class="subtitle" data-lang-en="Your trusted source for pure, high-quality edible oils." data-lang-hi="शुद्ध, उच्च-गुणवत्ता वाले खाद्य तेलों के लिए आपका विश्वसनीय स्रोत।">Your trusted source for pure, high-quality edible oils.</p>
     </header>
 
     <main>
-        <!-- Our Promise Section --><section class="section about-us hidden" id="about-us">
-            <h2 class="section-title" data-lang-en="Our Promise" data-lang-hi="हमारा वादा">Our Promise</h2>
-            <p data-lang-en="At Guru Sampoorna, we believe in purity and tradition. We are dedicated to providing 100% natural, chemical-free oils, extracted using age-old methods to retain maximum nutrients and authentic flavor. Health and wellness for your family is our top priority." data-lang-hi="गुरु सम्पूर्ण में, हम पवित्रता और परंपरा में विश्वास करते हैं। हम 100% प्राकृतिक, रसायन-मुक्त तेल प्रदान करने के लिए समर्पित हैं, जो अधिकतम पोषक तत्वों और प्रामाणिक स्वाद को बनाए रखने के लिए पुरानी विधियों का उपयोग करके निकाले जाते हैं। आपके परिवार का स्वास्थ्य और कल्याण हमारी सर्वोच्च प्राथमिकता है।">At Guru Sampoorna, we believe in purity and tradition. We are dedicated to providing 100% natural, chemical-free oils, extracted using age-old methods to retain maximum nutrients and authentic flavor. Health and wellness for your family is our top priority.</p>
+        <!-- Our Promise Section --><section class="section about-us-wrapper hidden" id="about-us-section">
+             <div id="threejs-canvas-container">
+                <canvas id="threejs-canvas"></canvas>
+            </div>
+            <div class="about-us">
+                <h2 class="section-title" data-lang-en="Our Promise" data-lang-hi="हमारा वादा">Our Promise</h2>
+                <p data-lang-en="At Guru Sampoorna, we believe in purity and tradition. We are dedicated to providing 100% natural, chemical-free oils, extracted using age-old methods to retain maximum nutrients and authentic flavor. Health and wellness for your family is our top priority." data-lang-hi="गुरु सम्पूर्ण में, हम पवित्रता और परंपरा में विश्वास करते हैं। हम 100% प्राकृतिक, रसायन-मुक्त तेल प्रदान करने के लिए समर्पित हैं, जो अधिकतम पोषक तत्वों और प्रामाणिक स्वाद को बनाए रखने के लिए पुरानी विधियों का उपयोग करके निकाले जाते हैं। आपके परिवार का स्वास्थ्य और कल्याण हमारी सर्वोच्च प्राथमिकता है।">At Guru Sampoorna, we believe in purity and tradition. We are dedicated to providing 100% natural, chemical-free oils, extracted using age-old methods to retain maximum nutrients and authentic flavor. Health and wellness for your family is our top priority.</p>
+            </div>
         </section>
         
-        <!-- Our Process in Action Section --><section class="section video-section hidden">
+        <!-- Our Process in Action Section --><section class="section video-section hidden process-video-section">
             <h2 class="section-title" data-lang-en="Our Process in Action" data-lang-hi="हमारी प्रक्रिया क्रियान्वित">Our Process in Action</h2>
             <div class="video-container">
                 <iframe loading="lazy" src="https://www.youtube.com/embed/z1PCp3nX-yk?autoplay=1&mute=1&loop=1&playlist=z1PCp3nX-yk&controls=0&showinfo=0&modestbranding=1" title="Guru Sampoorna Manufacturing Process" allow="autoplay; encrypted-media" allowfullscreen></iframe>
             </div>
         </section>
 
-        <!-- Explore With Us Section --><section class="section hidden">
+        <!-- Explore With Us Section --><section class="section hidden explore-section">
             <h2 class="section-title" data-lang-en="Explore With Us" data-lang-hi="हमारे साथ अन्वेषण करें">Explore With Us</h2>
             <div class="container">
                 <a href="https://gurusampoorna1.netlify.app/" target="_blank" class="card" onclick="gtag('event', 'price_list_click', { event_category: 'engagement', event_label: 'View Price List' });">
@@ -1192,15 +1300,15 @@
                 </div>
             </div>
         </section>
-        
+
         <!-- Our Bestsellers Section --><section class="section hidden">
             <h2 class="section-title" data-lang-en="Our Bestsellers" data-lang-hi="हमारे बेस्टसेलर">Our Bestsellers</h2>
             <div class="product-slider-container">
                 <div class="product-slider">
                     <div class="product-card">
-                        <img loading="lazy" src="https://i.ibb.co/Cx7DVMV/Peanut-f-2.jpg" alt="Groundnut Oil">
+                        <img loading="lazy" src="https://i.ibb.co/Cx7DVMV/Peanut-f-2.jpg" alt="Wood Pressed Groundnut Oil">
                         <div class="product-card-content">
-                            <h3 data-lang-en="Groundnut Oil" data-lang-hi="मूंगफली का तेल">Groundnut Oil</h3>
+                            <h3 data-lang-en="Wood Pressed Groundnut Oil" data-lang-hi="लकड़ी घानी मूंगफली का तेल">Wood Pressed Groundnut Oil</h3>
                             <p data-lang-en="Rich, nutty, and perfect for everyday cooking and deep frying." data-lang-hi="अमीर, पौष्टिक, और रोजमर्रा के खाना पकाने और डीप फ्राई के लिए एकदम सही।">Rich, nutty, and perfect for everyday cooking and deep frying.</p>
                             <a href="https://gurusampoorna1.netlify.app/" target="_blank" class="order-btn" data-lang-en="Order Now" data-lang-hi="अभी ऑर्डर करें">Order Now</a>
                         </div>
@@ -1214,18 +1322,42 @@
                         </div>
                     </div>
                     <div class="product-card">
-                        <img loading="lazy" src="https://i.ibb.co/PG37QV3p/Coconut-Oil-F-1.jpg" alt="Coconut Oil">
+                        <img loading="lazy" src="https://i.ibb.co/PG37QV3p/Coconut-Oil-F-1.jpg" alt="Wood Pressed Coconut Oil">
                         <div class="product-card-content">
-                            <h3 data-lang-en="Coconut Oil" data-lang-hi="नारियल का तेल">Coconut Oil</h3>
+                            <h3 data-lang-en="Wood Pressed Coconut Oil" data-lang-hi="लकड़ी घानी नारियल का तेल">Wood Pressed Coconut Oil</h3>
                             <p data-lang-en="Versatile and healthy, ideal for cooking, skin, and hair care." data-lang-hi="बहुमुखी और स्वस्थ, खाना पकाने, त्वचा और बालों की देखभाल के लिए आदर्श।">Versatile and healthy, ideal for cooking, skin, and hair care.</p>
                              <a href="https://gurusampoorna1.netlify.app/" target="_blank" class="order-btn" data-lang-en="Order Now" data-lang-hi="अभी ऑर्डर करें">Order Now</a>
                         </div>
                     </div>
                      <div class="product-card">
-                        <img loading="lazy" src="https://i.ibb.co/dFbhrWy/6233080595970377292.jpg" alt="Mustard Oil">
+                        <img loading="lazy" src="https://i.ibb.co/dFbhrWy/6233080595970377292.jpg" alt="Wood Pressed Mustard Oil">
                         <div class="product-card-content">
-                            <h3 data-lang-en="Mustard Oil" data-lang-hi="सरसों का तेल">Mustard Oil</h3>
+                            <h3 data-lang-en="Wood Pressed Mustard Oil" data-lang-hi="लकड़ी घानी सरसों का तेल">Wood Pressed Mustard Oil</h3>
                             <p data-lang-en="Strong, pungent, and a staple in traditional Indian cuisine for its flavor and benefits." data-lang-hi="मजबूत, तीखा, और अपने स्वाद और लाभों के लिए पारंपरिक भारतीय व्यंजनों में एक प्रधान।">Strong, pungent, and a staple in traditional Indian cuisine for its flavor and benefits.</p>
+                             <a href="https://gurusampoorna1.netlify.app/" target="_blank" class="order-btn" data-lang-en="Order Now" data-lang-hi="अभी ऑर्डर करें">Order Now</a>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <img loading="lazy" src="https://i.postimg.cc/m2GX0VHj/White-Sesame.jpg" alt="Wood Pressed Sesame Oil">
+                        <div class="product-card-content">
+                            <h3 data-lang-en="Wood Pressed Sesame Oil" data-lang-hi="लकड़ी घानी तिल का तेल">Wood Pressed Sesame Oil</h3>
+                            <p data-lang-en="Rich in antioxidants, perfect for traditional cooking and oil pulling." data-lang-hi="एंटीऑक्सीडेंट से भरपूर, पारंपरिक खाना पकाने और ऑयल पुलिंग के लिए उत्तम।">Rich in antioxidants, perfect for traditional cooking and oil pulling.</p>
+                             <a href="https://gurusampoorna1.netlify.app/" target="_blank" class="order-btn" data-lang-en="Order Now" data-lang-hi="अभी ऑर्डर करें">Order Now</a>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <img loading="lazy" src="https://i.postimg.cc/cJ8f1Gqn/Sunflower.jpg" alt="Wood Pressed Sunflower Oil">
+                        <div class="product-card-content">
+                            <h3 data-lang-en="Wood Pressed Sunflower Oil" data-lang-hi="लकड़ी घानी सूरजमुखी तेल">Wood Pressed Sunflower Oil</h3>
+                            <p data-lang-en="Light and healthy, rich in Vitamin E, great for all types of cooking." data-lang-hi="हल्का और स्वस्थ, विटामिन ई से भरपूर, सभी प्रकार के खाना पकाने के लिए बढ़िया।">Light and healthy, rich in Vitamin E, great for all types of cooking.</p>
+                             <a href="https://gurusampoorna1.netlify.app/" target="_blank" class="order-btn" data-lang-en="Order Now" data-lang-hi="अभी ऑर्डर करें">Order Now</a>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <img loading="lazy" src="https://i.postimg.cc/Gp0HQBNf/Flaxseed.jpg" alt="Wood Pressed Flaxseed Oil">
+                        <div class="product-card-content">
+                            <h3 data-lang-en="Wood Pressed Flaxseed Oil" data-lang-hi="लकड़ी घानी अलसी का तेल">Wood Pressed Flaxseed Oil</h3>
+                            <p data-lang-en="Excellent source of Omega-3, ideal for salads and smoothies." data-lang-hi="ओमेगा-3 का उत्कृष्ट स्रोत, सलाद और स्मूदी के लिए आदर्श।">Excellent source of Omega-3, ideal for salads and smoothies.</p>
                              <a href="https://gurusampoorna1.netlify.app/" target="_blank" class="order-btn" data-lang-en="Order Now" data-lang-hi="अभी ऑर्डर करें">Order Now</a>
                         </div>
                     </div>
@@ -1251,7 +1383,7 @@
             </div>
         </section>
 
-        <!-- New Video Section --><section class="section video-section new-video-section hidden">
+        <!-- Discover More Video Section --><section class="section video-section hidden discover-video-section">
             <h2 class="section-title" data-lang-en="Discover More" data-lang-hi="और जानें">Discover More</h2>
             <div class="video-container">
                 <iframe loading="lazy" src="https://www.youtube.com/embed/qogo9JX5EZU?autoplay=1&mute=1&loop=1&playlist=qogo9JX5EZU&controls=0&showinfo=0&modestbranding=1" title="New Embedded Video" allow="autoplay; encrypted-media" allowfullscreen></iframe>
@@ -1307,6 +1439,48 @@
                         <img loading="lazy" src="https://i.ibb.co/rRN9xnZf/6230911770629884355.jpg" alt="Visitor Swami Aishwaryanand Ji">
                         <p class="caption" data-lang-en="Swami Aishwaryanand Ji" data-lang-hi="स्वामी ऐश्वर्यानंद जी">Swami Aishwaryanand Ji</p>
                     </div>
+                    <!-- New slides start here -->
+                    <div class="slide">
+                        <img loading="lazy" src="https://i.postimg.cc/7hxFVz8M/Madhu-verma-ji-purv-ida-adhyaksh.jpg" alt="Visitor Shri Madhu Verma JI">
+                        <p class="caption" data-lang-en="Shri Madhu Verma JI" data-lang-hi="श्री मधु वर्मा जी">Shri Madhu Verma JI</p>
+                    </div>
+                    <div class="slide">
+                        <img loading="lazy" src="https://i.postimg.cc/ncWWsgzG/Gaurav-randive-bjp-nagar-adhyakash-indore.jpg" alt="Visitor Shri Gaurav Randive">
+                        <p class="caption" data-lang-en="Shri Gaurav Randive" data-lang-hi="श्री गौरव रणदिवे">Shri Gaurav Randive</p>
+                    </div>
+                    <div class="slide">
+                        <img loading="lazy" src="https://i.postimg.cc/90rpCXyg/Jaypal-singh-ji-chawda-Ida-adhyaksh-indore.jpg" alt="Visitor Shri Mahendra Ji Hadiya">
+                        <p class="caption" data-lang-en="Shri Mahendra Ji Hadiya" data-lang-hi="श्री महेंद्र जी हार्डिया">Shri Mahendra Ji Hadiya</p>
+                    </div>
+                    <div class="slide">
+                        <img loading="lazy" src="https://i.postimg.cc/BnGxwBwJ/20230912-203501.jpg" alt="Visitor Shri Ashwini JI Upadhayay">
+                        <p class="caption" data-lang-en="Shri Ashwini JI Upadhayay" data-lang-hi="श्री अश्विनी जी उपाध्याय">Shri Ashwini JI Upadhayay</p>
+                    </div>
+                    <div class="slide">
+                        <img loading="lazy" src="https://i.postimg.cc/vZzPsZjY/Indore-collector-manish-singh-ji.jpg" alt="Visitors Shri Manish Singh JI and Pranav Pandal JI">
+                        <p class="caption" data-lang-en="Shri Manish Singh JI and Pranav Pandal JI" data-lang-hi="श्री मनीष सिंह जी और प्रणव पंडाल जी">Shri Manish Singh JI and Pranav Pandal JI</p>
+                    </div>
+                    <div class="slide">
+                        <img loading="lazy" src="https://i.postimg.cc/KYCp9sws/Shankar-Lalwani.jpg" alt="Visitor Shri Shankar Lalwani JI">
+                        <p class="caption" data-lang-en="Shri Shankar Lalwani JI" data-lang-hi="श्री शंकर लालवानी जी">Shri Shankar Lalwani JI</p>
+                    </div>
+                    <div class="slide">
+                        <img loading="lazy" src="https://i.postimg.cc/brgTj6CT/Samarth-ji-chitnis.jpg" alt="Visitor Shri Samar JI Chitnish">
+                        <p class="caption" data-lang-en="Shri Samar JI Chitnish" data-lang-hi="श्री समर्थ जी चिटनिस">Shri Samar JI Chitnish</p>
+                    </div>
+                    <div class="slide">
+                        <img loading="lazy" src="https://i.postimg.cc/7YQ3MJpZ/20220302-151956.jpg" alt="Visitor Shri Malwi Bhabhi">
+                        <p class="caption" data-lang-en="Shri Malwi Bhabhi" data-lang-hi="श्रीमती मालवी भाभी">Shri Malwi Bhabhi</p>
+                    </div>
+                    <div class="slide">
+                        <img loading="lazy" src="https://i.postimg.cc/3JhCxH2L/IMG-20250405-WA0076.jpg" alt="School Student Visits">
+                        <p class="caption" data-lang-en="School Student Visits" data-lang-hi="स्कूली छात्रों का दौरा">School Student Visits</p>
+                    </div>
+                    <div class="slide">
+                        <img loading="lazy" src="https://i.postimg.cc/Dz0RpGzM/students.jpg" alt="College Students Visit">
+                        <p class="caption" data-lang-en="College Students Visit" data-lang-hi="कॉलेज के छात्रों का दौरा">College Students Visit</p>
+                    </div>
+                    <!-- New slides end here -->
                 </div>
                 <a class="prev">&#10094;</a>
                 <a class="next">&#10095;</a>
@@ -1341,7 +1515,7 @@
                     <p class="team-title" data-lang-en="Co-Founder" data-lang-hi="सह-संस्थापक">Co-Founder</p>
                 </div>
             </div>
-            <p class="about-paragraph" data-lang-en="Guru Sampoorna was founded in 2017 by visionary entrepreneur Madhav Patidar, inspired by the teachings and ideals of Shri Rajiv Ji Dixit. The company was established with the mission of offering high-quality, swadeshi chemical products across India, supporting the growth of the Swadeshi movement and empowering local farmers.<br><br>Madhav’s commitment to the movement is reflected in every aspect of the business, aiming to deliver products that are both beneficial for consumers and the country. Co-founder Devvrat plays a crucial role in overseeing the company's quality control measures, ensuring the highest standards of hygiene and consistency throughout the production process. Meanwhile, co-founder Govind is dedicated to providing an exceptional customer experience, addressing queries and ensuring that Guru Sampoorna's products are accessible to a wide audience.<br><br>Together, the team is driving Guru Sampoorna toward a future where quality, sustainability, and community development go hand in hand." data-lang-hi="गुरु सम्पूर्ण की स्थापना 2017 में दूरदर्शी उद्यमी माधव पाटीदार द्वारा श्री राजीव जी दीक्षित की शिक्षाओं और आदर्शों से प्रेरित होकर की गई थी। कंपनी की स्थापना पूरे भारत में उच्च-गुणवत्ता, स्वदेशी रासायनिक उत्पादों की पेशकश करने, स्वदेशी आंदोलन के विकास का समर्थन करने और स्थानीय किसानों को सशक्त बनाने के मिशन के साथ की गई थी।<br><br>आंदोलन के প্রতি माधव की प्रतिबद्धता व्यवसाय के हर पहलू में परिलक्षित होती है, जिसका उद्देश्य ऐसे उत्पाद वितरित करना है जो उपभोक्ताओं और देश दोनों के लिए फायदेमंद हों। सह-संस्थापक देवव्रत कंपनी के गुणवत्ता नियंत्रण उपायों की देखरेख में एक महत्वपूर्ण भूमिका निभाते हैं, जो उत्पादन प्रक्रिया के दौरान स्वच्छता और स्थिरता के उच्चतम मानकों को सुनिश्चित करते हैं। इस बीच, सह-संस्थापक गोविंद एक असाधारण ग्राहक अनुभव प्रदान करने, प्रश्नों को संबोधित करने और यह सुनिश्चित करने के लिए समर्पित हैं कि गुरु सम्पूर्ण के उत्पाद व्यापक दर्शकों के लिए सुलभ हों।<br><br>साथ में, टीम गुरु सम्पूर्ण को एक ऐसे भविष्य की ओर ले जा रही है जहाँ गुणवत्ता, स्थिरता और सामुदायिक विकास साथ-साथ चलते हैं।">Guru Sampoorna was founded in 2017 by visionary entrepreneur Madhav Patidar, inspired by the teachings and ideals of Shri Rajiv Ji Dixit. The company was established with the mission of offering high-quality, swadeshi chemical products across India, supporting the growth of the Swadeshi movement and empowering local farmers.<br><br>Madhav’s commitment to the movement is reflected in every aspect of the business, aiming to deliver products that are both beneficial for consumers and the country. Co-founder Devvrat plays a crucial role in overseeing the company's quality control measures, ensuring the highest standards of hygiene and consistency throughout the production process. Meanwhile, co-founder Govind is dedicated to providing an exceptional customer experience, addressing queries and ensuring that Guru Sampoorna's products are accessible to a wide audience.<br><br>Together, the team is driving Guru Sampoorna toward a future where quality, sustainability, and community development go hand in hand.</p>
+            <p class="about-paragraph" data-lang-en="Guru Sampoorna was founded in 2017 by visionary entrepreneur Madhav Patidar, inspired by the teachings and ideals of Shri Rajiv Ji Dixit. The company was established with the mission of offering high-quality, swadeshi chemical products across India, supporting the growth of the Swadeshi movement and empowering local farmers.<br><br>Madhav’s commitment to the movement is reflected in every aspect of the business, aiming to deliver products that are both beneficial for consumers and the country. Co-founder Devvrat plays a crucial role in overseeing the company's quality control measures, ensuring the highest standards of hygiene and consistency throughout the production process. Meanwhile, co-founder Govind is dedicated to providing an exceptional customer experience, addressing queries and ensuring that Guru Sampoorna's products are accessible to a wide audience.<br><br>Together, the team is driving Guru Sampoorna toward a future where quality, sustainability, and community development go hand in hand." data-lang-hi="गुरु सम्पूर्ण की स्थापना 2017 में दूरदर्शी उद्यमी माधव पाटीदार द्वारा श्री राजीव जी दीक्षित की शिक्षाओं और आदर्शों से प्रेरित होकर की गई थी। कंपनी की स्थापना पूरे भारत में उच्च-गुणवत्ता, स्वदेशी रासायनिक उत्पादों की पेशकश करने, स्वदेशी आंदोलन के विकास का समर्थन करने और स्थानीय किसानों को सशक्त बनाने के मिशन के साथ की गई थी।<br><br>आंदोलन के प्रति माधव की प्रतिबद्धता व्यवसाय के हर पहलू में परिलक्षित होती है, जिसका उद्देश्य ऐसे उत्पाद वितरित करना है जो उपभोक्ताओं और देश दोनों के लिए फायदेमंद हों। सह-संस्थापक देवव्रत कंपनी के गुणवत्ता नियंत्रण उपायों की देखरेख में एक महत्वपूर्ण भूमिका निभाते हैं, जो उत्पादन प्रक्रिया के दौरान स्वच्छता और स्थिरता के उच्चतम मानकों को सुनिश्चित करते हैं। इस बीच, सह-संस्थापक गोविंद एक असाधारण ग्राहक अनुभव प्रदान करने, प्रश्नों को संबोधित करने और यह सुनिश्चित करने के लिए समर्पित हैं कि गुरु सम्पूर्ण के उत्पाद व्यापक दर्शकों के लिए सुलभ हों।<br><br>साथ में, टीम गुरु सम्पूर्ण को एक ऐसे भविष्य की ओर ले जा रही है जहाँ गुणवत्ता, स्थिरता और सामुदायिक विकास साथ-साथ चलते हैं।">Guru Sampoorna was founded in 2017 by visionary entrepreneur Madhav Patidar, inspired by the teachings and ideals of Shri Rajiv Ji Dixit. The company was established with the mission of offering high-quality, swadeshi chemical products across India, supporting the growth of the Swadeshi movement and empowering local farmers.<br><br>Madhav’s commitment to the movement is reflected in every aspect of the business, aiming to deliver products that are both beneficial for consumers and the country. Co-founder Devvrat plays a crucial role in overseeing the company's quality control measures, ensuring the highest standards of hygiene and consistency throughout the production process. Meanwhile, co-founder Govind is dedicated to providing an exceptional customer experience, addressing queries and ensuring that Guru Sampoorna's products are accessible to a wide audience.<br><br>Together, the team is driving Guru Sampoorna toward a future where quality, sustainability, and community development go hand in hand.</p>
         </div>
     </div>
 
@@ -1403,8 +1577,27 @@
             // --- Language Toggle Logic ---
             const langToggleBtn = document.getElementById('lang-toggle');
             const translatableElements = document.querySelectorAll('[data-lang-en]');
-            
+            const h1Element = document.querySelector('header h1'); // Target the H1
+
             let currentLanguage = 'en';
+
+            const updateText = () => {
+                 translatableElements.forEach(el => {
+                    const text = el.getAttribute(`data-lang-${currentLanguage}`);
+                    // Only update if the element is NOT an H1 span (handled separately)
+                    if (!el.matches('h1 span')) {
+                        el.innerHTML = text; // Use innerHTML to support tags like <strong>
+                    }
+                });
+                 // Update H1 spans specifically
+                 if (h1Element) {
+                     const h1Spans = h1Element.querySelectorAll('span');
+                     h1Spans.forEach(span => {
+                         const text = span.getAttribute(`data-lang-${currentLanguage}`);
+                         span.textContent = text; // Use textContent for spans
+                     });
+                 }
+            }
 
             langToggleBtn.addEventListener('click', () => {
                 gtag('event', 'language_toggle_click', {
@@ -1418,42 +1611,41 @@
                     currentLanguage = 'en';
                     langToggleBtn.textContent = 'हिन्दी';
                 }
-                
-                translatableElements.forEach(el => {
-                    const text = el.getAttribute(`data-lang-${currentLanguage}`);
-                    el.innerHTML = text; // Use innerHTML to support tags like <strong>
-                });
+                updateText(); // Update all text elements
             });
+            // Initial text set (useful if default isn't English)
+            updateText(); 
 
-            // --- Scroll Animation ---
+            // --- Scroll Animation & Video View Tracking ---
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('visible');
 
-                        // Video view tracking for "Our Process in Action"
-                        if (entry.target.classList.contains('video-section') && !entry.target.classList.contains('new-video-section') && !entry.target.dataset.gaEventSent) {
+                        // Check if it's a video section and track view if not already sent
+                        if (entry.target.classList.contains('video-section') && !entry.target.dataset.gaEventSent) {
+                            let videoLabel = 'Unknown Video View';
+                            if (entry.target.classList.contains('process-video-section')) {
+                                videoLabel = 'Process Video View';
+                            } else if (entry.target.classList.contains('shorts-video-section')) {
+                                videoLabel = 'Quick Insights Video View';
+                            } else if (entry.target.classList.contains('discover-video-section')) {
+                                videoLabel = 'Discover More Video View';
+                            }
+                            
                             gtag('event', 'video_view', {
                                 'event_category': 'engagement',
-                                'event_label': 'Process Video View'
+                                'event_label': videoLabel
                             });
-                            entry.target.dataset.gaEventSent = 'true';
-                        }
-                        // Video view tracking for the new embedded video
-                        if (entry.target.classList.contains('new-video-section') && !entry.target.dataset.gaEventSent) {
-                            gtag('event', 'video_view', {
-                                'event_category': 'engagement',
-                                'event_label': 'Discover More Video View'
-                            });
-                            entry.target.dataset.gaEventSent = 'true';
+                            entry.target.dataset.gaEventSent = 'true'; // Mark as sent
                         }
                     }
                 });
             }, {
-                threshold: 0.1
+                threshold: 0.1 // Adjust threshold if needed, 0.1 means 10% visible
             });
 
-            const hiddenElements = document.querySelectorAll('.hidden');
+            const hiddenElements = document.querySelectorAll('.hidden:not(header)'); // Exclude header from general scroll animation
             hiddenElements.forEach(el => observer.observe(el));
 
 
@@ -1840,9 +2032,149 @@
                     console.log(`GA4 Event Sent: order_now_click for ${productName}`);
                 });
             });
+
+             // --- 3D Background Effect ---
+             let scene, camera, renderer, particles;
+            const container = document.getElementById('threejs-canvas-container');
+
+            function initThreeJS() {
+                if (!container) {
+                    console.error("3D container not found!");
+                    return; 
+                }
+                scene = new THREE.Scene();
+
+                camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+                camera.position.z = 5;
+
+                renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('threejs-canvas'), alpha: true }); // Use existing canvas, make background transparent
+                renderer.setSize(container.clientWidth, container.clientHeight);
+                renderer.setPixelRatio(window.devicePixelRatio); // Adjust for high-res screens
+
+                // Create particles (droplets/seeds)
+                const particleCount = 100;
+                const geometry = new THREE.SphereGeometry(0.05, 8, 8); // Simple sphere geometry
+                const material = new THREE.MeshBasicMaterial({ color: 0xf39c12, transparent: true, opacity: 0.7 }); // Golden color, slightly transparent
+                particles = [];
+
+                for (let i = 0; i < particleCount; i++) {
+                    const particle = new THREE.Mesh(geometry, material);
+                    
+                    // Position randomly within a volume
+                    particle.position.x = (Math.random() - 0.5) * 10;
+                    particle.position.y = (Math.random() - 0.5) * 10;
+                    particle.position.z = (Math.random() - 0.5) * 5;
+
+                    // Store random velocity/rotation for animation
+                    particle.velocity = new THREE.Vector3(
+                        (Math.random() - 0.5) * 0.002,
+                        (Math.random() - 0.5) * 0.002,
+                        0 // Keep Z velocity 0 for 2.5D effect
+                    );
+                     particle.rotationSpeed = new THREE.Vector3(
+                        Math.random() * 0.005,
+                        Math.random() * 0.005,
+                        0
+                    );
+
+                    scene.add(particle);
+                    particles.push(particle);
+                }
+                
+                window.addEventListener('resize', onWindowResize, false);
+                animate();
+            }
+
+            function animate() {
+                requestAnimationFrame(animate);
+                 if (!renderer || !scene || !camera || !particles) return; // Add check
+
+                // Animate particles
+                particles.forEach(particle => {
+                    particle.position.add(particle.velocity);
+                    particle.rotation.x += particle.rotationSpeed.x;
+                    particle.rotation.y += particle.rotationSpeed.y;
+
+                    // Boundary check - wrap around
+                    if (particle.position.x > 5 || particle.position.x < -5) particle.velocity.x *= -1;
+                    if (particle.position.y > 5 || particle.position.y < -5) particle.velocity.y *= -1;
+                    // Keep Z relatively stable
+                    if (particle.position.z > 2.5 || particle.position.z < -2.5) particle.velocity.z *= -1;
+
+                });
+
+                renderer.render(scene, camera);
+            }
+
+            function onWindowResize() {
+                if (!container || !renderer || !camera) return; // Add check
+                 // Check if container has valid dimensions
+                if (container.clientWidth > 0 && container.clientHeight > 0) {
+                    camera.aspect = container.clientWidth / container.clientHeight;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize(container.clientWidth, container.clientHeight);
+                }
+            }
+             
+            // Wait until the promise section exists before initializing
+             const promiseSection = document.getElementById('about-us-section');
+             if (promiseSection) {
+                 initThreeJS();
+             } else {
+                 console.error("Could not find the 'about-us-section' to attach the 3D canvas.");
+             }
+
+            // --- Bestseller Auto-Scroll ---
+            const productSliderContainer = document.querySelector('.product-slider-container');
+            let productScrollInterval;
+            let manualScrollTimeout;
+
+            function startProductAutoScroll() {
+                stopProductAutoScroll(); // Clear any existing interval
+                productScrollInterval = setInterval(() => {
+                    if (!productSliderContainer) return;
+                    const container = productSliderContainer;
+                    const cardWidth = 280; // As defined in CSS
+                    const gap = 30; // As defined in CSS
+                    const scrollAmount = cardWidth + gap;
+
+                    // Check if we are near the end
+                    // Use a small buffer (e.g., 10px) to account for fractional pixels
+                    if (container.scrollLeft + container.clientWidth + scrollAmount >= container.scrollWidth - 10) {
+                        // If near the end, smooth scroll to the beginning
+                        container.scrollTo({ left: 0, behavior: 'smooth' });
+                    } else {
+                        // Otherwise, scroll by one card width
+                        container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+                    }
+                }, 2000); // 2 seconds
+            }
+
+            function stopProductAutoScroll() {
+                clearInterval(productScrollInterval);
+            }
+
+            if (productSliderContainer) {
+                // Start scrolling when the page loads
+                startProductAutoScroll();
+
+                // Pause scrolling when the user hovers over the slider
+                productSliderContainer.addEventListener('mouseenter', stopProductAutoScroll);
+                // Resume scrolling when the user moves the mouse out
+                productSliderContainer.addEventListener('mouseleave', startProductAutoScroll);
+
+                // Stop auto-scroll if user interacts with the scrollbar
+                productSliderContainer.addEventListener('scroll', () => {
+                    stopProductAutoScroll(); // Stop on manual scroll
+                    clearTimeout(manualScrollTimeout);
+                    // Restart autoscroll after 3 seconds of inactivity
+                    manualScrollTimeout = setTimeout(startProductAutoScroll, 3000); 
+                });
+            }
+
+
         });
     </script>
 
 </body>
 </html>
-

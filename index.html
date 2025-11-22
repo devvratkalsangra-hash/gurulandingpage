@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Guru Sampoorna - Pure & Trusted Oils</title>
-    <!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-301FER4EFB"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-301FER4EFB"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
@@ -12,7 +13,8 @@
 
       gtag('config', 'G-301FER4EFB');
     </script>
-    <!-- Meta Pixel Code --><script>
+    <!-- Meta Pixel Code -->
+    <script>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
     n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -27,7 +29,8 @@
     <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=2156564608170783&ev=PageView&noscript=1"
     /></noscript>
-    <!-- End Meta Pixel Code --><link rel="preconnect" href="https://fonts.googleapis.com">
+    <!-- End Meta Pixel Code -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Alice&family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
@@ -42,14 +45,20 @@
             --shadow-color: rgba(0, 0, 0, 0.08);
         }
 
-        body {
+        * {
+            box-sizing: border-box; /* Crucial for responsive sizing */
+        }
+
+        html, body {
             margin: 0;
+            padding: 0;
             font-family: 'Poppins', sans-serif;
             background-color: var(--background-color);
             color: var(--text-color);
             text-align: center;
-            overflow-x: hidden;
-            position: relative; /* Needed for the pseudo-element */
+            overflow-x: hidden; /* Prevent horizontal scroll */
+            width: 100%;
+            position: relative; 
         }
         
         /* --- Order Now Button --- */
@@ -64,11 +73,11 @@
             border-radius: 50px;
             cursor: pointer;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smoother transition */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; 
             text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 8px; /* Space between icon and text */
+            gap: 8px; 
             animation: scrollOpenClose 3s infinite ease-in-out;
         }
 
@@ -108,8 +117,8 @@
             right: 0;
             bottom: 0;
             background: radial-gradient(ellipse at center, rgba(243, 156, 18, 0.15) 0%, rgba(211, 84, 0, 0) 70%);
-            z-index: -1; /* Places the glow behind the content */
-            pointer-events: none; /* Ensures it doesn't block interactions */
+            z-index: -1; 
+            pointer-events: none; 
         }
 
 
@@ -126,7 +135,7 @@
             background-color: var(--background-color);
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
             z-index: 1001;
-            box-sizing: border-box;
+            max-width: 100vw; /* Ensure it doesn't exceed viewport */
         }
 
         .top-bar > a:first-of-type { /* Order Now button */
@@ -138,9 +147,9 @@
         }
 
         .top-bar .logo {
-            width: 100px; /* Make logo smaller */
+            width: 100px; 
             height: auto;
-            margin: 0; /* Reset margins */
+            margin: 0; 
             cursor: pointer;
         }
 
@@ -151,21 +160,22 @@
 
         /* --- Header --- */
         header {
-            padding: 100px 20px 0; /* Adjust top padding */
+            padding: 100px 20px 0; 
             display: flex;
             flex-direction: column;
             align-items: center;
-            min-height: 200px; /* Ensure enough space for animation */
+            min-height: 200px; 
+            width: 100%;
         }
 
         #namaste-icon {
-            width: 100px; /* Adjust size as needed */
+            width: 100px; 
             height: auto;
-            margin-bottom: 20px; /* Space between icon and H1 */
+            margin-bottom: 20px; 
             opacity: 0;
             transform: translateY(20px);
             animation: fadeInUp 0.5s forwards ease-out;
-            animation-delay: 0.1s; /* Appear slightly before first word */
+            animation-delay: 0.1s; 
         }
 
         h1 {
@@ -174,18 +184,19 @@
             color: var(--primary-color);
             margin: 0 0 10px;
             font-weight: 700;
-            display: flex; /* Keep flex for potential future use, but spans handle layout now */
+            display: flex; 
             justify-content: center;
             align-items: center;
-            gap: 15px; /* Spacing between words */
-            flex-wrap: wrap; /* Allow words to wrap if needed */
+            gap: 15px; 
+            flex-wrap: wrap; 
+            width: 100%;
         }
 
         /* Span styles for H1 animation */
         h1 span {
             opacity: 0;
             transform: translateY(20px);
-            display: inline-block; /* Needed for transform */
+            display: inline-block; 
             animation: fadeInUp 0.5s forwards ease-out;
         }
 
@@ -198,7 +209,7 @@
             opacity: 0;
             transform: translateY(20px);
             animation: fadeInUp 0.5s forwards ease-out;
-            animation-delay: 2.0s; /* Delay after last word of h1 */
+            animation-delay: 2.0s; 
         }
 
         /* --- Animations --- */
@@ -273,12 +284,15 @@
         /* --- Main Content Sections --- */
         main {
             padding: 20px;
+            width: 100%;
+            overflow-x: hidden; /* Extra precaution for main content */
         }
 
         .section {
             max-width: 1100px;
             margin: 40px auto;
             position: relative; /* Needed for positioning 3D canvas */
+            width: 100%;
         }
 
         h2.section-title {
@@ -341,8 +355,6 @@
             width: 100%;
             height: 100%;
         }
-
-
         
         /* --- Featured Products Section --- */
         .product-slider-container {
@@ -380,7 +392,6 @@
             text-align: center;
             padding-bottom: 25px;
             transition: transform 0.3s ease;
-            flex-shrink: 0; /* Ensure cards don't shrink */
         }
 
         .product-card:hover {
@@ -909,167 +920,87 @@
             color: #7a5e43;
         }
         
-        /* --- AI Assistant --- */
-        #ai-assistant-btn {
+        /* --- WhatsApp Float --- */
+        .whatsapp-float {
             position: fixed;
-            bottom: 30px;
-            right: 30px; /* Moved from left to right */
             width: 60px;
             height: 60px;
-            background-color: var(--primary-color);
-            color: white;
-            border-radius: 50%;
-            border: none;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 3px #999;
+            z-index: 1000;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
-            cursor: pointer;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.25);
-            z-index: 999;
-            transition: transform 0.3s ease, background-color 0.3s ease;
+            text-decoration: none;
+            transition: transform 0.3s ease;
         }
-
-        #ai-assistant-btn:hover {
+        
+        .whatsapp-float:hover {
             transform: scale(1.1);
-            background-color: #e67e22;
+            background-color: #128C7E;
         }
 
-        #ai-chat-modal {
-            display: none;
-            position: fixed;
-            bottom: 100px;
-            right: 30px; /* Moved from left to right */
-            left: auto; /* Unset left property */
-            width: 350px;
-            max-width: 90vw;
-            height: 500px;
-            max-height: 70vh;
-            background-color: #fff;
-            border-radius: 15px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-            z-index: 1001;
-            flex-direction: column;
-            overflow: hidden;
-            transform-origin: bottom right; /* Changed transform origin */
-            animation: popIn 0.4s ease-out;
-        }
-
-        .ai-chat-header {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .ai-chat-header h3 {
-            margin: 0;
-            font-size: 1.1rem;
-        }
-
-        .ai-chat-header .close-chat {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 24px;
-            cursor: pointer;
-            line-height: 1;
-        }
-        
-        .ai-lang-toggle-btn {
-            background: none;
-            border: 1px solid white;
-            color: white;
-            padding: 4px 8px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 0.8rem;
-            margin-left: auto;
-            margin-right: 10px;
-        }
-
-        .ai-chat-messages {
-            flex-grow: 1;
-            padding: 15px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-        
-        .chat-message {
-            padding: 10px 15px;
-            border-radius: 18px;
-            max-width: 80%;
-            line-height: 1.5;
-            text-align: left;
-        }
-
-        .chat-message.user {
-            background-color: #e0e0e0;
-            color: #333;
-            border-bottom-right-radius: 4px;
-            align-self: flex-end;
-        }
-
-        .chat-message.ai {
-            background-color: var(--primary-color);
-            color: white;
-            border-bottom-left-radius: 4px;
-            align-self: flex-start;
-        }
-        
-        .chat-message .chat-btn {
-            display: inline-block;
-            padding: 8px 15px;
-            margin-top: 10px;
-            background-color: #fff;
-            color: var(--primary-color);
+        /* --- Contact Options Modal --- */
+        .contact-modal-content {
+            background: white;
             border-radius: 20px;
+            padding: 40px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+        }
+        
+        .contact-modal-content h3 {
+            margin-top: 0;
+            margin-bottom: 25px;
+            color: var(--primary-color);
+            font-size: 1.5rem;
+        }
+        
+        .contact-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .contact-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px 20px;
+            border-radius: 10px;
             text-decoration: none;
             font-weight: 600;
-            border: 1px solid var(--primary-color);
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-        
-        .chat-message .chat-btn-alt {
-            background-color: transparent;
-            color: #fff;
-            border: 1px solid #fff;
-        }
-
-        .chat-message .chat-btn:hover {
-            background-color: var(--secondary-color);
-            color: #fff;
-            border-color: var(--secondary-color);
-        }
-
-        .ai-chat-input-area {
-            display: flex;
-            border-top: 1px solid #eee;
-        }
-        
-        #ai-chat-input {
-            flex-grow: 1;
-            border: none;
-            padding: 15px;
-            font-size: 1rem;
-            outline: none;
-        }
-
-        #ai-chat-send {
-            background: var(--primary-color);
-            border: none;
+            font-size: 1.1rem;
             color: white;
-            padding: 0 20px;
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: transform 0.2s ease;
         }
-        #ai-chat-send:hover {
-            background-color: #e67e22;
+        
+        .contact-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .contact-btn.whatsapp {
+            background-color: #25d366;
+        }
+        
+        .contact-btn.phone {
+            background-color: #3498db;
+        }
+        
+        .contact-btn i {
+            font-size: 1.3rem;
+        }
+
+        .my-float {
+            margin-top: 16px;
         }
 
         /* --- Responsive Design --- */
@@ -1101,15 +1032,10 @@
             .team-container {
                 gap: 20px;
             }
-            #ai-assistant-btn {
+            /* WhatsApp Float mobile adjust if needed */
+            .whatsapp-float {
                 bottom: 20px;
-                right: 20px; /* Moved from left to right */
-            }
-            #ai-chat-modal {
-                left: 10px;
-                right: 10px;
-                bottom: 90px;
-                width: auto;
+                right: 20px;
             }
             
              /* Apply mobile card animations */
@@ -1127,8 +1053,20 @@
         @media (max-width: 420px) { /* Target smaller mobile screens */
             .top-bar {
                 padding: 5px 10px; /* Reduce side padding */
-                grid-template-columns: 1fr auto 1fr; /* Use 1fr for equal spacing */
+                grid-template-columns: auto auto auto; /* Adjust columns for tight space */
+                justify-content: space-between; /* Space out elements */
             }
+            .top-bar > a:first-of-type { /* Order Now button */
+                justify-self: start;
+            }
+             .top-bar .logo-link {
+                /* Let grid handle centering */
+                 justify-self: center; 
+            }
+             .top-bar > button:last-of-type { /* Lang toggle button */
+                justify-self: end;
+            }
+
 
             #order-now-btn, #lang-toggle {
                 padding: 8px 12px; /* Reduce button padding */
@@ -1138,18 +1076,7 @@
             .top-bar .logo {
                 width: 80px; /* Make logo even smaller on tiny screens */
             }
-             
-            .top-bar > a:first-of-type { /* Order Now button */
-                justify-self: start;
-            }
             
-            .top-bar .logo-link {
-                justify-self: center;
-            }
-    
-            .top-bar > button:last-of-type { /* Lang toggle button */
-                justify-self: end;
-            }
 
             #namaste-icon { width: 60px; margin-bottom: 10px;}
             h1 { font-size: 2.5rem; gap: 8px;} /* Further reduce size and gap */
@@ -1215,11 +1142,11 @@
                     <h3 data-lang-en="See Our Process" data-lang-hi="हमारी प्रक्रिया देखें">See Our Process</h3>
                     <p data-lang-en="Watch how we manufacture our oils with care, transparency, and purity." data-lang-hi="देखें कि हम अपने तेलों का निर्माण देखभाल, पारदर्शिता और पवित्रता के साथ कैसे करते हैं।">Watch how we manufacture our oils with care, transparency, and purity.</p>
                 </a>
-                <a href="https://wa.me/916262120120" target="_blank" class="card" onclick="gtag('event', 'contact_us_click', { event_category: 'engagement', event_label: 'Contact Us' });">
+                <div class="card" id="contact-us-card"> <!-- Changed from <a> to <div> -->
                     <div class="icon"><i class="fa-solid fa-headset"></i></div>
                     <h3 data-lang-en="Contact Us" data-lang-hi="हमसे संपर्क करें">Contact Us</h3>
                     <p data-lang-en="Have questions? Tap here to chat with us directly for any queries." data-lang-hi="कोई सवाल है? किसी भी प्रश्न के लिए सीधे हमसे चैट करने के लिए यहां टैप करें।">Have questions? Tap here to chat with us directly for any queries.</p>
-                </a>
+                </div>
                 <a href="#" id="visitors-card" class="card">
                     <div class="icon"><i class="fa-solid fa-people-group"></i></div>
                     <h3 data-lang-en="Our Visitors" data-lang-hi="हमारे आगंतुक">Our Visitors</h3>
@@ -1300,15 +1227,15 @@
                 </div>
             </div>
         </section>
-
+        
         <!-- Our Bestsellers Section --><section class="section hidden">
             <h2 class="section-title" data-lang-en="Our Bestsellers" data-lang-hi="हमारे बेस्टसेलर">Our Bestsellers</h2>
             <div class="product-slider-container">
                 <div class="product-slider">
                     <div class="product-card">
-                        <img loading="lazy" src="https://i.ibb.co/Cx7DVMV/Peanut-f-2.jpg" alt="Wood Pressed Groundnut Oil">
+                        <img loading="lazy" src="https://i.ibb.co/Cx7DVMV/Peanut-f-2.jpg" alt="Groundnut Oil">
                         <div class="product-card-content">
-                            <h3 data-lang-en="Wood Pressed Groundnut Oil" data-lang-hi="लकड़ी घानी मूंगफली का तेल">Wood Pressed Groundnut Oil</h3>
+                            <h3 data-lang-en="Groundnut Oil" data-lang-hi="मूंगफली का तेल">Groundnut Oil</h3>
                             <p data-lang-en="Rich, nutty, and perfect for everyday cooking and deep frying." data-lang-hi="अमीर, पौष्टिक, और रोजमर्रा के खाना पकाने और डीप फ्राई के लिए एकदम सही।">Rich, nutty, and perfect for everyday cooking and deep frying.</p>
                             <a href="https://gurusampoorna1.netlify.app/" target="_blank" class="order-btn" data-lang-en="Order Now" data-lang-hi="अभी ऑर्डर करें">Order Now</a>
                         </div>
@@ -1322,42 +1249,18 @@
                         </div>
                     </div>
                     <div class="product-card">
-                        <img loading="lazy" src="https://i.ibb.co/PG37QV3p/Coconut-Oil-F-1.jpg" alt="Wood Pressed Coconut Oil">
+                        <img loading="lazy" src="https://i.ibb.co/PG37QV3p/Coconut-Oil-F-1.jpg" alt="Coconut Oil">
                         <div class="product-card-content">
-                            <h3 data-lang-en="Wood Pressed Coconut Oil" data-lang-hi="लकड़ी घानी नारियल का तेल">Wood Pressed Coconut Oil</h3>
+                            <h3 data-lang-en="Coconut Oil" data-lang-hi="नारियल का तेल">Coconut Oil</h3>
                             <p data-lang-en="Versatile and healthy, ideal for cooking, skin, and hair care." data-lang-hi="बहुमुखी और स्वस्थ, खाना पकाने, त्वचा और बालों की देखभाल के लिए आदर्श।">Versatile and healthy, ideal for cooking, skin, and hair care.</p>
                              <a href="https://gurusampoorna1.netlify.app/" target="_blank" class="order-btn" data-lang-en="Order Now" data-lang-hi="अभी ऑर्डर करें">Order Now</a>
                         </div>
                     </div>
                      <div class="product-card">
-                        <img loading="lazy" src="https://i.ibb.co/dFbhrWy/6233080595970377292.jpg" alt="Wood Pressed Mustard Oil">
+                        <img loading="lazy" src="https://i.ibb.co/dFbhrWy/6233080595970377292.jpg" alt="Mustard Oil">
                         <div class="product-card-content">
-                            <h3 data-lang-en="Wood Pressed Mustard Oil" data-lang-hi="लकड़ी घानी सरसों का तेल">Wood Pressed Mustard Oil</h3>
+                            <h3 data-lang-en="Mustard Oil" data-lang-hi="सरसों का तेल">Mustard Oil</h3>
                             <p data-lang-en="Strong, pungent, and a staple in traditional Indian cuisine for its flavor and benefits." data-lang-hi="मजबूत, तीखा, और अपने स्वाद और लाभों के लिए पारंपरिक भारतीय व्यंजनों में एक प्रधान।">Strong, pungent, and a staple in traditional Indian cuisine for its flavor and benefits.</p>
-                             <a href="https://gurusampoorna1.netlify.app/" target="_blank" class="order-btn" data-lang-en="Order Now" data-lang-hi="अभी ऑर्डर करें">Order Now</a>
-                        </div>
-                    </div>
-                    <div class="product-card">
-                        <img loading="lazy" src="https://i.postimg.cc/m2GX0VHj/White-Sesame.jpg" alt="Wood Pressed Sesame Oil">
-                        <div class="product-card-content">
-                            <h3 data-lang-en="Wood Pressed Sesame Oil" data-lang-hi="लकड़ी घानी तिल का तेल">Wood Pressed Sesame Oil</h3>
-                            <p data-lang-en="Rich in antioxidants, perfect for traditional cooking and oil pulling." data-lang-hi="एंटीऑक्सीडेंट से भरपूर, पारंपरिक खाना पकाने और ऑयल पुलिंग के लिए उत्तम।">Rich in antioxidants, perfect for traditional cooking and oil pulling.</p>
-                             <a href="https://gurusampoorna1.netlify.app/" target="_blank" class="order-btn" data-lang-en="Order Now" data-lang-hi="अभी ऑर्डर करें">Order Now</a>
-                        </div>
-                    </div>
-                    <div class="product-card">
-                        <img loading="lazy" src="https://i.postimg.cc/cJ8f1Gqn/Sunflower.jpg" alt="Wood Pressed Sunflower Oil">
-                        <div class="product-card-content">
-                            <h3 data-lang-en="Wood Pressed Sunflower Oil" data-lang-hi="लकड़ी घानी सूरजमुखी तेल">Wood Pressed Sunflower Oil</h3>
-                            <p data-lang-en="Light and healthy, rich in Vitamin E, great for all types of cooking." data-lang-hi="हल्का और स्वस्थ, विटामिन ई से भरपूर, सभी प्रकार के खाना पकाने के लिए बढ़िया।">Light and healthy, rich in Vitamin E, great for all types of cooking.</p>
-                             <a href="https://gurusampoorna1.netlify.app/" target="_blank" class="order-btn" data-lang-en="Order Now" data-lang-hi="अभी ऑर्डर करें">Order Now</a>
-                        </div>
-                    </div>
-                    <div class="product-card">
-                        <img loading="lazy" src="https://i.postimg.cc/Gp0HQBNf/Flaxseed.jpg" alt="Wood Pressed Flaxseed Oil">
-                        <div class="product-card-content">
-                            <h3 data-lang-en="Wood Pressed Flaxseed Oil" data-lang-hi="लकड़ी घानी अलसी का तेल">Wood Pressed Flaxseed Oil</h3>
-                            <p data-lang-en="Excellent source of Omega-3, ideal for salads and smoothies." data-lang-hi="ओमेगा-3 का उत्कृष्ट स्रोत, सलाद और स्मूदी के लिए आदर्श।">Excellent source of Omega-3, ideal for salads and smoothies.</p>
                              <a href="https://gurusampoorna1.netlify.app/" target="_blank" class="order-btn" data-lang-en="Order Now" data-lang-hi="अभी ऑर्डर करें">Order Now</a>
                         </div>
                     </div>
@@ -1372,7 +1275,7 @@
                     <a href="https://www.amazon.in/s?k=GURU+SAMPOORNA+TAAJA&ref=bl_dp_s_web_0" target="_blank" class="platform-logo" title="Find us on Amazon" onclick="gtag('event', 'platform_click', { 'platform_name': 'Amazon' });">
                        <img loading="lazy" src="https://i.ibb.co/PsWXsZKr/amazon-logo-on-transparent-background-free-vector.jpg" alt="Amazon Logo">
                     </a>
-                    <a href="https://blinkit.com/prn/guru-sampoorna-taaja-wood-pressed-groundnut-oil/prid/686035?srsltid=AfmBOoqucYZ_57fUc-GetTVs4NiFqolCqq8EQxCCiGXHkil1CnrHv0pXY" target="_blank" class="platform-logo" title="Find us on Blinkit" onclick="gtag('event', 'platform_click', { 'platform_name': 'Blinkit' });">
+                    <a href="https://blinkit.com/prn/guru-sampoorna-taaja-wood-pressed-groundnut-oil/prid/686035?srsltid=AfmBOoqucYZ_57fUc-GetTVz4NiFqolCqq8EQxCCiGXHkil1CnrHv0pXY" target="_blank" class="platform-logo" title="Find us on Blinkit" onclick="gtag('event', 'platform_click', { 'platform_name': 'Blinkit' });">
                        <img loading="lazy" src="https://i.ibb.co/Vc7S9XYP/Blinkit-yellow-rounded-svg.png" alt="Blinkit Logo">
                     </a>
                 </div>
@@ -1392,27 +1295,26 @@
 
     </main>
     
-    <!-- AI Assistant Floating Button --><button id="ai-assistant-btn" title="Ask a Question">
-        <i class="fa-solid fa-comment-dots"></i>
-    </button>
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/916262120120" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 
-    <!-- AI Assistant Chat Modal --><div id="ai-chat-modal">
-        <div class="ai-chat-header">
-            <h3 data-lang-en="AI Assistant" data-lang-hi="एआई सहायक">AI Assistant</h3>
-            <button id="ai-lang-toggle" class="ai-lang-toggle-btn">हिन्दी</button>
-            <button class="close-chat">&times;</button>
-        </div>
-        <div class="ai-chat-messages">
-            <!-- Messages will be added here by JS --></div>
-        <div class="ai-chat-input-area">
-            <input type="text" id="ai-chat-input" 
-                   data-lang-en-placeholder="Ask a question..." 
-                   data-lang-hi-placeholder="एक सवाल पूछें..." 
-                   placeholder="Ask a question...">
-            <button id="ai-chat-send"><i class="fa-solid fa-paper-plane"></i></button>
+    <!-- Contact Options Modal -->
+    <div id="contact-options-modal" class="modal">
+        <div class="modal-content contact-modal-content">
+            <span class="close-modal">&times;</span>
+            <h3 data-lang-en="Get in Touch" data-lang-hi="संपर्क करें">Get in Touch</h3>
+            <div class="contact-buttons">
+                <a href="https://wa.me/916262120120" target="_blank" class="contact-btn whatsapp" onclick="gtag('event', 'contact_option_click', { 'method': 'WhatsApp' });">
+                    <i class="fab fa-whatsapp"></i> <span data-lang-en="WhatsApp Us" data-lang-hi="व्हाट्सएप करें">WhatsApp Us</span>
+                </a>
+                <a href="tel:+916262120120" class="contact-btn phone" onclick="gtag('event', 'contact_option_click', { 'method': 'Phone Call' });">
+                    <i class="fa-solid fa-phone"></i> <span data-lang-en="Call Us Now" data-lang-hi="अभी कॉल करें">Call Us Now</span>
+                </a>
+            </div>
         </div>
     </div>
-
 
     <!-- Visitors Modal --><div id="visitors-modal" class="modal">
         <div class="modal-content">
@@ -1450,7 +1352,7 @@
                     </div>
                     <div class="slide">
                         <img loading="lazy" src="https://i.postimg.cc/90rpCXyg/Jaypal-singh-ji-chawda-Ida-adhyaksh-indore.jpg" alt="Visitor Shri Mahendra Ji Hadiya">
-                        <p class="caption" data-lang-en="Shri Mahendra Ji Hadiya" data-lang-hi="श्री महेंद्र जी हार्डिया">Shri Mahendra Ji Hadiya</p>
+                        <p class="caption" data-lang-en="Shri Mahendra Ji Hardia" data-lang-hi="श्री महेंद्र जी हार्डिया">Shri Mahendra Ji Hardia</p>
                     </div>
                     <div class="slide">
                         <img loading="lazy" src="https://i.postimg.cc/BnGxwBwJ/20230912-203501.jpg" alt="Visitor Shri Ashwini JI Upadhayay">
@@ -1458,15 +1360,15 @@
                     </div>
                     <div class="slide">
                         <img loading="lazy" src="https://i.postimg.cc/vZzPsZjY/Indore-collector-manish-singh-ji.jpg" alt="Visitors Shri Manish Singh JI and Pranav Pandal JI">
-                        <p class="caption" data-lang-en="Shri Manish Singh JI and Pranav Pandal JI" data-lang-hi="श्री मनीष सिंह जी और प्रणव पंडाल जी">Shri Manish Singh JI and Pranav Pandal JI</p>
+                        <p class="caption" data-lang-en="Shri Manish Singh JI and Pranav Ji Mandal" data-lang-hi="श्री मनीष सिंह जी और प्रणव जी मंडल">Shri Manish Singh JI and Pranav Ji Mandal</p>
                     </div>
                     <div class="slide">
                         <img loading="lazy" src="https://i.postimg.cc/KYCp9sws/Shankar-Lalwani.jpg" alt="Visitor Shri Shankar Lalwani JI">
                         <p class="caption" data-lang-en="Shri Shankar Lalwani JI" data-lang-hi="श्री शंकर लालवानी जी">Shri Shankar Lalwani JI</p>
                     </div>
                     <div class="slide">
-                        <img loading="lazy" src="https://i.postimg.cc/brgTj6CT/Samarth-ji-chitnis.jpg" alt="Visitor Shri Samar JI Chitnish">
-                        <p class="caption" data-lang-en="Shri Samar JI Chitnish" data-lang-hi="श्री समर्थ जी चिटनिस">Shri Samar JI Chitnish</p>
+                        <img loading="lazy" src="https://i.postimg.cc/brgTj6CT/Samarth-ji-chitnis.jpg" alt="Visitor Shri Samarth JI Chitnish">
+                        <p class="caption" data-lang-en="Shri Samarth JI Chitnish" data-lang-hi="श्री समर्थ जी चिटनिस">Shri Samarth Ji Chitnish</p>
                     </div>
                     <div class="slide">
                         <img loading="lazy" src="https://i.postimg.cc/7YQ3MJpZ/20220302-151956.jpg" alt="Visitor Shri Malwi Bhabhi">
@@ -1747,6 +1649,40 @@
                 }
             });
 
+            // --- Contact Options Modal Logic ---
+            const contactUsCard = document.getElementById('contact-us-card');
+            const contactModal = document.getElementById('contact-options-modal');
+            const closeContactModalBtn = contactModal.querySelector('.close-modal');
+
+            if(contactUsCard) {
+                contactUsCard.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    gtag('event', 'contact_us_click', {
+                        event_category: 'engagement',
+                        event_label: 'Contact Us'
+                    });
+                    contactModal.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                });
+            }
+
+            const closeContactModal = () => {
+                contactModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            };
+
+            if(closeContactModalBtn) {
+                closeContactModalBtn.addEventListener('click', closeContactModal);
+            }
+            if(contactModal) {
+                contactModal.addEventListener('click', (e) => {
+                    if (e.target === contactModal) {
+                        closeContactModal();
+                    }
+                });
+            }
+
+
              // --- Testimonial Slider Logic ---
             const testimonialSlider = document.querySelector('.testimonial-slider');
             const testimonialSlides = document.querySelectorAll('.testimonial-slide');
@@ -1794,218 +1730,6 @@
             });
 
             startTestimonialAutoScroll();
-
-
-            // --- AI Assistant Logic ---
-            const aiBtn = document.getElementById('ai-assistant-btn');
-            const aiModal = document.getElementById('ai-chat-modal');
-            const closeAiModalBtn = aiModal.querySelector('.close-chat');
-            const chatMessages = aiModal.querySelector('.ai-chat-messages');
-            const chatInput = document.getElementById('ai-chat-input');
-            const sendBtn = document.getElementById('ai-chat-send');
-            const aiLangToggleBtn = document.getElementById('ai-lang-toggle');
-            
-            let currentChatLanguage = 'en';
-
-            const translations = {
-                en: {
-                    greeting: "Hello! I'm your AI assistant. How can I help you with Guru Sampoorna today?",
-                    placeholder: "Ask a question...",
-                    price: "You can view our complete price list and order directly from our online catalog. Click the button below to start shopping!<br><br><a href='https://gurusampoorna1.netlify.app/' target='_blank' class='chat-btn'>View Price List & Order</a>",
-                    address: "Our store is in Indore. Click the button for directions on Google Maps.<br><br><a href='https://maps.app.goo.gl/kmsHJMQamBAQQs3y8' target='_blank' class='chat-btn'>Get Directions</a>",
-                    contact: "You can chat with us directly on WhatsApp for any questions.<br><br><a href='https://wa.me/916262120120' target='_blank' class='chat-btn'>Chat on WhatsApp</a>",
-                    timing: "Our store is open from Monday to Saturday, 10 AM to 9 PM. We are closed on Sundays.",
-                    order: "You can place your order directly from our online catalog. Click the button below to start shopping!<br><br><a href='https://gurusampoorna1.netlify.app/' target='_blank' class='chat-btn'>Order Now</a>",
-                    delivery: "Yes, we deliver! For orders within Indore, we offer next-day delivery. If you order today, you'll get it tomorrow. For orders outside Indore, we deliver across India. The delivery charges depend on the product weight and your area's pincode.",
-                    peanut_oil: "Our wood-pressed Peanut Oil prices are: ₹300 for 1L, ₹1475 for 5L, and ₹4275 for 15L. You can also bring your own container for a refill!",
-                    almond_oil: "Our Almond Oil prices are: ₹280 for 100ml, ₹580 for 200ml, and ₹2600 for 1L.",
-                    castor_oil: "Our Castor Oil prices are: ₹80 for 100ml and ₹150 for 200ml.",
-                    coconut_oil: "Our Coconut Oil prices are: ₹180 for 200ml and ₹800 for 1L.",
-                    black_mustard_oil: "Our Black Mustard Oil prices are: ₹85 for 200ml, ₹350 for 1L, ₹1725 for 5L, and ₹5025 for 15L.",
-                    yellow_mustard_oil: "Our Yellow Mustard Oil prices are: ₹85 for 200ml, ₹350 for 1L, and ₹1725 for 5L.",
-                    white_sesame_oil: "Our White Sesame Oil prices are: ₹95 for 200ml, ₹450 for 1L, ₹2225 for 5L, and ₹7200 for 15L.",
-                    black_sesame_oil: "Our Black Sesame Oil prices are: ₹200 for 200ml and ₹900 for 1L.",
-                    flaxseed_oil: "Our Flaxseed Oil prices are: ₹120 for 200ml and ₹550 for 1L.",
-                    sunflower_oil: "Our Sunflower Oil prices are: ₹410 for 1L, ₹2025 for 5L, and ₹5925 for 15L.",
-                    jaggery: "Our Jaggery is available for ₹110 per kg.",
-                    khandsari: "Our Khandsari sugar is available for ₹50 for 400gm and ₹120 for 1kg.",
-                    ghee: "Our Desi Gir Cow Ghee (A2) is available for ₹1050 for 500ml and ₹2100 for 1L.",
-                    about: "Guru Sampoorna was founded in 2017 by Madhav Patidar. You can learn more about our story and our team by clicking the button below.<br><br><button onclick=\"document.getElementById('about-us-card').click(); document.getElementById('ai-chat-modal').style.display='none';\" class='chat-btn chat-btn-alt'>Meet the Team</button>",
-                    products: "We specialize in 100% pure, natural, wood-pressed edible oils and other natural products. Ask me about a specific product for its price!",
-                    hello: "Hello! How can I assist you today?",
-                    thanks: "You're welcome! Is there anything else I can help with?",
-                    default: "I'm sorry, I can't answer that. For detailed queries, please contact us directly.<br><br><a href='https://wa.me/916262120120' target='_blank' class='chat-btn'>Chat on WhatsApp</a>"
-                },
-                hi: {
-                    greeting: "नमस्ते! मैं आपका एआई सहायक हूं। मैं आज गुरु सम्पूर्ण के साथ आपकी कैसे मदद कर सकता हूं?",
-                    placeholder: "एक सवाल पूछें...",
-                    price: "आप हमारी पूरी मूल्य सूची देख सकते हैं और सीधे हमारे ऑनलाइन कैटलॉग से ऑर्डर कर सकते हैं। खरीदारी शुरू करने के लिए नीचे दिए गए बटन पर क्लिक करें!<br><br><a href='https://gurusampoorna1.netlify.app/' target='_blank' class='chat-btn'>मूल्य सूची देखें और ऑर्डर करें</a>",
-                    address: "हमारा स्टोर इंदौर में है। गूगल मैप्स पर दिशा-निर्देशों के लिए बटन पर क्लिक करें।<br><br><a href='https://maps.app.goo.gl/kmsHJMQamBAQQs3y8' target='_blank' class='chat-btn'>दिशा-निर्देश प्राप्त करें</a>",
-                    contact: "किसी भी प्रश्न के लिए आप सीधे व्हाट्सएप पर हमसे चैट कर सकते हैं।<br><br><a href='https://wa.me/916262120120' target='_blank' class='chat-btn'>व्हाट्सएप पर चैट करें</a>",
-                    timing: "हमारी दुकान सोमवार से शनिवार, सुबह 10 बजे से रात 9 बजे तक खुली रहती है। हम रविवार को बंद रहते हैं।",
-                    order: "आप सीधे हमारे ऑनलाइन कैटलॉग से अपना ऑर्डर दे सकते हैं। खरीदारी शुरू करने के लिए नीचे दिए गए बटन पर क्लिक करें!<br><br><a href='https://gurusampoorna1.netlify.app/' target='_blank' class='chat-btn'>अभी ऑर्डर करें</a>",
-                    delivery: "हाँ, हम डिलीवरी करते हैं! इंदौर के भीतर के ऑर्डर के लिए, हम अगले दिन डिलीवरी प्रदान करते हैं। यदि आप आज ऑर्डर करते हैं, तो आपको यह कल मिल जाएगा। इंदौर के बाहर के ऑर्डर के लिए, हम पूरे भारत में डिलीवरी करते हैं। डिलीवरी शुल्क उत्पाद के वजन और आपके क्षेत्र के पिनकोड पर निर्भर करता है।",
-                    peanut_oil: "हमारी लकड़ी-दबाई हुई मूंगफली तेल की कीमतें हैं: 1L के लिए ₹300, 5L के लिए ₹1475, और 15L के लिए ₹4275। आप रिफिल के लिए अपना कंटेनर भी ला सकते हैं!",
-                    almond_oil: "हमारे बादाम तेल की कीमतें हैं: 100ml के लिए ₹280, 200ml के लिए ₹580, और 1L के लिए ₹2600।",
-                    castor_oil: "हमारे अरंडी के तेल की कीमतें हैं: 100ml के लिए ₹80 और 200ml के लिए ₹150।",
-                    coconut_oil: "हमारे नारियल तेल की कीमतें हैं: 200ml के लिए ₹180 और 1L के लिए ₹800।",
-                    black_mustard_oil: "हमारी काली सरसों के तेल की कीमतें हैं: 200ml के लिए ₹85, 1L के लिए ₹350, 5L के लिए ₹1725, और 15L के लिए ₹5025।",
-                    yellow_mustard_oil: "हमारी पीली सरसों के तेल की कीमतें हैं: 200ml के लिए ₹85, 1L के लिए ₹350, और 5L के लिए ₹1725।",
-                    white_sesame_oil: "हमारे सफेद तिल के तेल की कीमतें हैं: 200ml के लिए ₹95, 1L के लिए ₹450, 5L के लिए ₹2225, और 15L के लिए ₹7200।",
-                    black_sesame_oil: "हमारे काले तिल के तेल की कीमतें हैं: 200ml के लिए ₹200 और 1L के लिए ₹900।",
-                    flaxseed_oil: "हमारे अलसी के तेल की कीमतें हैं: 200ml के लिए ₹120 और 1L के लिए ₹550।",
-                    sunflower_oil: "हमारे सूरजमुखी तेल की कीमतें हैं: 1L के लिए ₹410, 5L के लिए ₹2025, और 15L के लिए ₹5925।",
-                    jaggery: "हमारा गुड़ ₹110 प्रति किलो उपलब्ध है।",
-                    khandsari: "हमारी खांडसारी चीनी 400gm के लिए ₹50 और 1kg के लिए ₹120 में उपलब्ध है।",
-                    ghee: "हमारा देसी गिर गाय का घी (A2) 500ml के लिए ₹1050 और 1L के लिए ₹2100 में उपलब्ध है।",
-                    about: "गुरु सम्पूर्ण की स्थापना 2017 में माधव पाटीदार ने की थी। आप नीचे दिए गए बटन पर क्लिक करके हमारी कहानी और हमारी टीम के बारे में अधिक जान सकते हैं।<br><br><button onclick=\"document.getElementById('about-us-card').click(); document.getElementById('ai-chat-modal').style.display='none';\" class='chat-btn chat-btn-alt'>टीम से मिलें</button>",
-                    products: "हम 100% शुद्ध, प्राकृतिक, लकड़ी-दबाए हुए खाद्य तेलों और अन्य प्राकृतिक उत्पादों में विशेषज्ञ हैं। किसी विशिष्ट उत्पाद की कीमत के लिए मुझसे पूछें!",
-                    hello: "नमस्ते! मैं आज आपकी कैसे सहायता कर सकता हूं?",
-                    thanks: "आपका स्वागत है! क्या मैं किसी और चीज में मदद कर सकता हूं?",
-                    default: "मुझे खेद है, मैं इसका उत्तर नहीं दे सकता। विस्तृत प्रश्नों के लिए, कृपया सीधे हमसे संपर्क करें।<br><br><a href='https://wa.me/916262120120' target='_blank' class='chat-btn'>व्हाट्सएप पर चैट करें</a>"
-                }
-            };
-
-            const addMessage = (text, sender) => {
-                const messageEl = document.createElement('div');
-                messageEl.classList.add('chat-message', sender);
-                messageEl.innerHTML = text;
-                chatMessages.appendChild(messageEl);
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-            };
-            
-            aiLangToggleBtn.addEventListener('click', () => {
-                currentChatLanguage = currentChatLanguage === 'en' ? 'hi' : 'en';
-                aiLangToggleBtn.textContent = currentChatLanguage === 'en' ? 'हिन्दी' : 'English';
-                chatInput.placeholder = translations[currentChatLanguage].placeholder;
-                 // Clear chat and show new greeting
-                chatMessages.innerHTML = '';
-                addMessage(translations[currentChatLanguage].greeting, 'ai');
-            });
-
-            aiBtn.addEventListener('click', () => {
-                gtag('event', 'ai_chat_open', {
-                    event_category: 'engagement',
-                    event_label: 'AI Assistant Opened'
-                });
-                const isVisible = aiModal.style.display === 'flex';
-                if (isVisible) {
-                    aiModal.style.display = 'none';
-                } else {
-                    aiModal.style.display = 'flex';
-                    if (chatMessages.children.length === 0) {
-                        setTimeout(() => {
-                            addMessage(translations[currentChatLanguage].greeting, 'ai');
-                        }, 500);
-                    }
-                }
-            });
-
-            closeAiModalBtn.addEventListener('click', () => {
-                aiModal.style.display = 'none';
-            });
-
-            const getAIResponse = (userQuestion) => {
-                const q = userQuestion.toLowerCase();
-                const langResponses = translations[currentChatLanguage];
-                let response = langResponses.default;
-                let question_type = 'unrecognized_question';
-
-                // More specific product checks first
-                if (q.includes('peanut') || q.includes('groundnut') || q.includes('मूंगफली')) {
-                    response = langResponses.peanut_oil;
-                    question_type = 'product_inquiry_peanut';
-                } else if (q.includes('almond') || q.includes('बादाम')) {
-                    response = langResponses.almond_oil;
-                    question_type = 'product_inquiry_almond';
-                } else if (q.includes('castor') || q.includes('अरंडी')) {
-                    response = langResponses.castor_oil;
-                    question_type = 'product_inquiry_castor';
-                } else if (q.includes('coconut') || q.includes('नारियल')) {
-                    response = langResponses.coconut_oil;
-                    question_type = 'product_inquiry_coconut';
-                } else if (q.includes('black mustard') || q.includes('kali sarso') || q.includes('काली सरसों')) {
-                    response = langResponses.black_mustard_oil;
-                    question_type = 'product_inquiry_black_mustard';
-                } else if (q.includes('yellow mustard') || q.includes('pili sarso') || q.includes('पीली सरसों')) {
-                    response = langResponses.yellow_mustard_oil;
-                    question_type = 'product_inquiry_yellow_mustard';
-                } else if (q.includes('white sesame') || q.includes('safed til') || q.includes('सफेद तिल')) {
-                    response = langResponses.white_sesame_oil;
-                    question_type = 'product_inquiry_white_sesame';
-                } else if (q.includes('black sesame') || q.includes('kala til') || q.includes('काला तिल')) {
-                    response = langResponses.black_sesame_oil;
-                    question_type = 'product_inquiry_black_sesame';
-                } else if (q.includes('flaxseed') || q.includes('alsi') || q.includes('अलसी')) {
-                    response = langResponses.flaxseed_oil;
-                    question_type = 'product_inquiry_flaxseed';
-                } else if (q.includes('sunflower') || q.includes('surajmukhi') || q.includes('सूरजमुखी')) {
-                    response = langResponses.sunflower_oil;
-                    question_type = 'product_inquiry_sunflower';
-                } else if (q.includes('jaggery') || q.includes('gud') || q.includes('गुड़')) {
-                    response = langResponses.jaggery;
-                     question_type = 'product_inquiry_jaggery';
-                } else if (q.includes('khandsari') || q.includes('खांडसारी')) {
-                    response = langResponses.khandsari;
-                    question_type = 'product_inquiry_khandsari';
-                } else if (q.includes('ghee') || q.includes('gir cow') || q.includes('a2') || q.includes('घी')) {
-                    response = langResponses.ghee;
-                    question_type = 'product_inquiry_ghee';
-                } else if (q.includes('order') || q.includes('buy') || q.includes('how to order') || q.includes('ऑर्डर') || q.includes('कैसे खरीदें')) {
-                    response = langResponses.order;
-                    question_type = 'order_inquiry';
-                } else if (q.includes('price') || q.includes('rate') || q.includes('catalog') || q.includes('मूल्य') || q.includes('दाम')) {
-                    response = langResponses.price;
-                    question_type = 'price_inquiry';
-                } else if (q.includes('address') || q.includes('location') || q.includes('where are you') || q.includes('पता') || q.includes('जगह')) {
-                    response = langResponses.address;
-                    question_type = 'address_inquiry';
-                } else if (q.includes('contact') || q.includes('number') || q.includes('phone') || q.includes('संपर्क') || q.includes('नंबर')) {
-                    response = langResponses.contact;
-                    question_type = 'contact_inquiry';
-                } else if (q.includes('timing') || q.includes('open') || q.includes('hours') || q.includes('close') || q.includes('sunday') || q.includes('समय') || q.includes('खुलने') || q.includes('रविवार') || q.includes('बंद')) {
-                    response = langResponses.timing;
-                    question_type = 'timing_inquiry';
-                } else if (q.includes('about') || q.includes('who are you') || q.includes('founder') || q.includes('बारे में') || q.includes('कौन हो')) {
-                    response = langResponses.about;
-                    question_type = 'about_inquiry';
-                } else if (q.includes('oil') || q.includes('products') || q.includes('what do you sell') || q.includes('तेल') || q.includes('उत्पाद')) {
-                    response = langResponses.products;
-                    question_type = 'general_product_inquiry';
-                } else if (q.includes('delivery') || q.includes('ship') || q.includes('outside indore') || q.includes('pincode') || q.includes('डिलीवरी')) {
-                    response = langResponses.delivery;
-                    question_type = 'delivery_inquiry';
-                } else if (q.includes('hello') || q.includes('hi') || q.includes('hey') || q.includes('नमस्ते') || q.includes('हाय')) {
-                    response = langResponses.hello;
-                    question_type = 'greeting';
-                } else if (q.includes('thank') || q.includes('धन्यवाद')) {
-                    response = langResponses.thanks;
-                    question_type = 'thanks';
-                }
-                
-                gtag('event', 'ai_question', {
-                    'question_type': question_type,
-                    'user_query': userQuestion
-                });
-
-                setTimeout(() => addMessage(response, 'ai'), 1000);
-            };
-
-            const handleSend = () => {
-                const userText = chatInput.value.trim();
-                if (userText) {
-                    addMessage(userText, 'user');
-                    chatInput.value = '';
-                    getAIResponse(userText);
-                }
-            };
-            
-            sendBtn.addEventListener('click', handleSend);
-            chatInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') {
-                    handleSend();
-                }
-            });
 
             // --- GA4 Event Tracking for Order Now Button ---
             const orderBtn = document.getElementById('order-now-btn');

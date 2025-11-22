@@ -66,10 +66,8 @@
             background: linear-gradient(45deg, #e67e22, #d35400); /* Vibrant gradient */
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 6px 16px; /* Reduced padding to match toggle height */
             font-family: 'Poppins', sans-serif;
-            font-size: 1rem;
-            font-weight: 600;
             border-radius: 50px;
             cursor: pointer;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
@@ -79,6 +77,7 @@
             align-items: center;
             gap: 8px; 
             animation: scrollOpenClose 3s infinite ease-in-out;
+            height: 42px; /* Set fixed height to match language toggle */
         }
 
         #order-now-btn:hover {
@@ -87,20 +86,36 @@
             animation-play-state: paused;
             clip-path: inset(0 0 0 0);
         }
+
+        /* Text Container inside Button */
+        .btn-text {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            line-height: 0.9;
+            font-size: 0.7rem; /* Small font size */
+            font-weight: 700;
+            text-transform: uppercase;
+            text-align: left;
+        }
         
         /* --- Language Toggle Button --- */
         #lang-toggle {
             background-color: var(--primary-color);
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 0 20px; /* Horizontal padding */
             font-family: 'Poppins', sans-serif;
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: 600;
             border-radius: 50px;
             cursor: pointer;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             transition: background-color 0.3s ease, transform 0.3s ease;
+            height: 42px; /* Fixed height to match Order button */
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         #lang-toggle:hover {
@@ -129,7 +144,7 @@
             left: 0;
             width: 100%;
             display: grid;
-            grid-template-columns: 1fr auto 1fr;
+            grid-template-columns: 1fr auto 1fr; /* Explicit 3 columns */
             align-items: center;
             padding: 5px 20px;
             background-color: var(--background-color);
@@ -1053,14 +1068,13 @@
         @media (max-width: 420px) { /* Target smaller mobile screens */
             .top-bar {
                 padding: 5px 10px; /* Reduce side padding */
-                grid-template-columns: auto auto auto; /* Adjust columns for tight space */
-                justify-content: space-between; /* Space out elements */
+                grid-template-columns: 1fr auto 1fr; /* Use 1fr for equal spacing */
+                gap: 5px; /* Reduce gap to ensure fit */
             }
             .top-bar > a:first-of-type { /* Order Now button */
                 justify-self: start;
             }
              .top-bar .logo-link {
-                /* Let grid handle centering */
                  justify-self: center; 
             }
              .top-bar > button:last-of-type { /* Lang toggle button */
@@ -1088,7 +1102,15 @@
 </head>
 <body>
     <div class="top-bar">
-        <a href="https://gurusampoorna1.netlify.app/" target="_blank" id="order-now-btn" data-lang-en="<i class='fa-solid fa-cart-shopping'></i> Order Now" data-lang-hi="<i class='fa-solid fa-cart-shopping'></i> अभी ऑर्डर करें"><i class='fa-solid fa-cart-shopping'></i> Order Now</a>
+        <a href="https://gurusampoorna1.netlify.app/" target="_blank" id="order-now-btn" 
+           data-lang-en="<i class='fa-solid fa-cart-shopping'></i><div class='btn-text'><span>Order</span><span>Now</span></div>" 
+           data-lang-hi="<i class='fa-solid fa-cart-shopping'></i><div class='btn-text'><span>अभी</span><span>ऑर्डर</span></div>">
+           <i class='fa-solid fa-cart-shopping'></i>
+           <div class="btn-text">
+               <span>Order</span>
+               <span>Now</span>
+           </div>
+        </a>
         <a href="#" class="logo-link">
              <img src="https://i.ibb.co/G4bKRCy5/1002397847-removebg-preview-1-1.png" alt="Guru Sampoorna Logo" class="logo">
         </a>
@@ -1368,7 +1390,7 @@
                     </div>
                     <div class="slide">
                         <img loading="lazy" src="https://i.postimg.cc/brgTj6CT/Samarth-ji-chitnis.jpg" alt="Visitor Shri Samarth JI Chitnish">
-                        <p class="caption" data-lang-en="Shri Samarth JI Chitnish" data-lang-hi="श्री समर्थ जी चिटनिस">Shri Samarth Ji Chitnish</p>
+                        <p class="caption" data-lang-en="Shri Samarth JI Chitnish" data-lang-hi="श्री समर्थ जी चिटनिस">Shri Samarth JI Chitnish</p>
                     </div>
                     <div class="slide">
                         <img loading="lazy" src="https://i.postimg.cc/7YQ3MJpZ/20220302-151956.jpg" alt="Visitor Shri Malwi Bhabhi">

@@ -87,7 +87,7 @@
             clip-path: inset(0 0 0 0);
         }
 
-        /* Text Container inside Button */
+        /* --- Text Container inside Button --- */
         .btn-text {
             display: flex;
             flex-direction: column;
@@ -101,25 +101,25 @@
         
         /* --- Language Toggle Button --- */
         #lang-toggle {
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 0 20px; /* Horizontal padding */
+            background-color: transparent; /* Transparent middle */
+            color: var(--primary-color); /* Orange text */
+            border: 2px solid var(--primary-color); /* Orange border */
+            padding: 0 15px; /* Reduced padding */
             font-family: 'Poppins', sans-serif;
-            font-size: 0.9rem;
+            font-size: 0.8rem; /* Smaller font size */
             font-weight: 600;
-            border-radius: 50px;
+            border-radius: 50px; /* Oval corners */
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            transition: background-color 0.3s ease, transform 0.3s ease;
-            height: 42px; /* Fixed height to match Order button */
+            transition: all 0.3s ease;
+            height: 34px; /* Reduced height (smaller than order button) */
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
         #lang-toggle:hover {
-            background-color: #e67e22;
+            background-color: var(--primary-color); /* Fill on hover */
+            color: white;
             transform: scale(1.05);
         }
 
@@ -1097,9 +1097,15 @@
             }
 
 
-            #order-now-btn, #lang-toggle {
-                padding: 8px 12px; /* Reduce button padding */
-                font-size: 0.85rem; /* Make text smaller */
+            #order-now-btn {
+                padding: 8px 12px; 
+                font-size: 0.85rem; 
+            }
+
+            #lang-toggle {
+                padding: 0 10px; /* Adjust padding for mobile */
+                height: 30px; /* Even smaller on mobile */
+                font-size: 0.75rem;
             }
              
             .top-bar .logo {
@@ -1196,42 +1202,9 @@
                 </a>
             </div>
         </section>
-        
-        <!-- Customer Testimonials Section --><section class="section hidden">
-            <h2 class="section-title" data-lang-en="What Our Customers Say" data-lang-hi="हमारे ग्राहक क्या कहते हैं">What Our Customers Say</h2>
-            <div class="testimonial-container">
-                 <div class="testimonial-slider">
-                    <div class="testimonial-slide active">
-                        <div class="stars">
-                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                        </div>
-                        <p class="quote" data-lang-en="&quot;The groundnut oil is incredibly pure and aromatic. It has completely changed the taste of my cooking for the better!&quot;" data-lang-hi="&quot;मूंगफली का तेल अविश्वसनीय रूप से शुद्ध और सुगंधित है। इसने मेरे खाना पकाने का स्वाद पूरी तरह से बदल दिया है!&quot;">"The groundnut oil is incredibly pure and aromatic. It has completely changed the taste of my cooking for the better!"</p>
-                        <p class="author">- Anjali P.</p>
-                    </div>
-                    <div class="testimonial-slide">
-                         <div class="stars">
-                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                        </div>
-                        <p class="quote" data-lang-en="&quot;Finally, a brand that delivers what it promises. The coconut oil feels so natural. Highly recommended for anyone who values quality.&quot;" data-lang-hi="&quot;अंत में, एक ऐसा ब्रांड जो अपने वादे पूरे करता है। नारियल का तेल बहुत प्राकृतिक लगता है। गुणवत्ता को महत्व देने वाले किसी भी व्यक्ति के लिए अत्यधिक अनुशंसित है।&quot;">"Finally, a brand that delivers what it promises. The coconut oil feels so natural. Highly recommended for anyone who values quality."</p>
-                        <p class="author">- Rohan K.</p>
-                    </div>
-                    <div class="testimonial-slide">
-                         <div class="stars">
-                           <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                        </div>
-                        <p class="quote" data-lang-en="&quot;Excellent customer service and even better products. The A2 ghee is a must-try. You can taste the purity in every bite.&quot;" data-lang-hi="&quot;उत्कृष्ट ग्राहक सेवा और उससे भी बेहतर उत्पाद। A2 घी ज़रूर आज़माना चाहिए। आप हर निवाले में शुद्धता का स्वाद ले सकते हैं।&quot;">"Excellent customer service and even better products. The A2 ghee is a must-try. You can taste the purity in every bite."</p>
-                        <p class="author">- Sunita M.</p>
-                    </div>
-                </div>
-                <a class="testimonial-nav prev">&#10094;</a>
-                <a class="testimonial-nav next">&#10095;</a>
-                <div class="google-reviews-link">
-                     <a href="https://www.google.com/maps/place/GURU+Sampoorna+Taaja+Cold+Wood+Pressed+Oil+And+Natural+Products/@22.7196062,75.9068863,17z/data=!4m8!3m7!1s0x3962e33e860c9193:0x36450e1bff4e27b7!8m2!3d22.7196062!4d75.9094612!9m1!1b1!16s%2Fg%2F11f5tv28d_?entry=ttu&g_ep=EgoyMDI1MDkxNy4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="review-btn" data-lang-en="Read All 1000+ Reviews" data-lang-hi="सभी 1000+ समीक्षाएं पढ़ें" onclick="gtag('event', 'read_reviews_click', { 'event_category': 'engagement', 'event_label': 'All Reviews' }); fbq('trackCustom', 'ReadReviews');">Read All 1000+ Reviews</a>
-                </div>
-            </div>
-        </section>
 
-        <!-- Journey of Purity Section --><section class="section hidden">
+        <!-- Journey of Purity Section (Moved Here) -->
+        <section class="section hidden">
             <h2 class="section-title" data-lang-en="Our Journey of Purity" data-lang-hi="हमारी शुद्धता की यात्रा">Our Journey of Purity</h2>
             <div class="journey-timeline">
                 <div class="journey-step">
@@ -1265,7 +1238,8 @@
             </div>
         </section>
         
-        <!-- Our Bestsellers Section --><section class="section hidden">
+        <!-- Our Bestsellers Section (Moved Here) -->
+        <section class="section hidden">
             <h2 class="section-title" data-lang-en="Our Bestsellers" data-lang-hi="हमारे बेस्टसेलर">Our Bestsellers</h2>
             <div class="product-slider-container">
                 <div class="product-slider">
@@ -1305,15 +1279,47 @@
             </div>
         </section>
         
+        <!-- Customer Testimonials Section (Moved Here) -->
+        <section class="section hidden">
+            <h2 class="section-title" data-lang-en="What Our Customers Say" data-lang-hi="हमारे ग्राहक क्या कहते हैं">What Our Customers Say</h2>
+            <div class="testimonial-container">
+                 <div class="testimonial-slider">
+                    <div class="testimonial-slide active">
+                        <div class="stars">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p class="quote" data-lang-en="&quot;The groundnut oil is incredibly pure and aromatic. It has completely changed the taste of my cooking for the better!&quot;" data-lang-hi="&quot;मूंगफली का तेल अविश्वसनीय रूप से शुद्ध और सुगंधित है। इसने मेरे खाना पकाने का स्वाद पूरी तरह से बदल दिया है!&quot;">"The groundnut oil is incredibly pure and aromatic. It has completely changed the taste of my cooking for the better!"</p>
+                        <p class="author">- Anjali P.</p>
+                    </div>
+                    <div class="testimonial-slide">
+                         <div class="stars">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p class="quote" data-lang-en="&quot;Finally, a brand that delivers what it promises. The coconut oil feels so natural. Highly recommended for anyone who values quality.&quot;" data-lang-hi="&quot;अंत में, एक ऐसा ब्रांड जो अपने वादे पूरे करता है। नारियल का तेल बहुत प्राकृतिक लगता है। गुणवत्ता को महत्व देने वाले किसी भी व्यक्ति के लिए अत्यधिक अनुशंसित है।&quot;">"Finally, a brand that delivers what it promises. The coconut oil feels so natural. Highly recommended for anyone who values quality."</p>
+                        <p class="author">- Rohan K.</p>
+                    </div>
+                    <div class="testimonial-slide">
+                         <div class="stars">
+                           <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p class="quote" data-lang-en="&quot;Excellent customer service and even better products. The A2 ghee is a must-try. You can taste the purity in every bite.&quot;" data-lang-hi="&quot;उत्कृष्ट ग्राहक सेवा और उससे भी बेहतर उत्पाद। A2 घी ज़रूर आज़माना चाहिए। आप हर निवाले में शुद्धता का स्वाद ले सकते हैं।&quot;">"Excellent customer service and even better products. The A2 ghee is a must-try. You can taste the purity in every bite."</p>
+                        <p class="author">- Sunita M.</p>
+                    </div>
+                </div>
+                <a class="testimonial-nav prev">&#10094;</a>
+                <a class="testimonial-nav next">&#10095;</a>
+                <div class="google-reviews-link">
+                     <a href="https://www.google.com/maps/place/GURU+Sampoorna+Taaja+Cold+Wood+Pressed+Oil+And+Natural+Products/@22.7196062,75.9068863,17z/data=!4m8!3m7!1s0x3962e33e860c9193:0x36450e1bff4e27b7!8m2!3d22.7196062!4d75.9094612!9m1!1b1!16s%2Fg%2F11f5tv28d_?entry=ttu&g_ep=EgoyMDI1MDkxNy4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="review-btn" data-lang-en="Read All 1000+ Reviews" data-lang-hi="सभी 1000+ समीक्षाएं पढ़ें" onclick="gtag('event', 'read_reviews_click', { 'event_category': 'engagement', 'event_label': 'All Reviews' }); fbq('trackCustom', 'ReadReviews');">Read All 1000+ Reviews</a>
+                </div>
+            </div>
+        </section>
+
         <!-- Availability Section --><section class="section hidden">
              <div class="availability-section">
                 <h4 class="availability-title" data-lang-en="Also Available On" data-lang-hi="यहां भी उपलब्ध है">Also Available On</h4>
                 <div class="logos-container">
-                    <a href="https://www.amazon.in/s?k=GURU+SAMPOORNA+TAAJA&ref=bl_dp_s_web_0" target="_blank" class="platform-logo" title="Find us on Amazon" onclick="gtag('event', 'platform_click', { 'platform_name': 'Amazon' }); fbq('trackCustom', 'PlatformClick', {platform: 'Amazon'});">
+                    <a href="https://hosturl.link/1jWH5u" target="_blank" class="platform-logo" title="Find us on Amazon" onclick="gtag('event', 'platform_click', { 'platform_name': 'Amazon' }); fbq('trackCustom', 'PlatformClick', {platform: 'Amazon'});">
                        <img loading="lazy" src="https://i.ibb.co/PsWXsZKr/amazon-logo-on-transparent-background-free-vector.jpg" alt="Amazon Logo">
-                    </a>
-                    <a href="https://blinkit.com/prn/guru-sampoorna-taaja-wood-pressed-groundnut-oil/prid/686035?srsltid=AfmBOoqucYZ_57fUc-GetTVz4NiFqolCqq8EQxCCiGXHkil1CnrHv0pXY" target="_blank" class="platform-logo" title="Find us on Blinkit" onclick="gtag('event', 'platform_click', { 'platform_name': 'Blinkit' }); fbq('trackCustom', 'PlatformClick', {platform: 'Blinkit'});">
-                       <img loading="lazy" src="https://i.ibb.co/Vc7S9XYP/Blinkit-yellow-rounded-svg.png" alt="Blinkit Logo">
                     </a>
                 </div>
                 <div class="delivery-info">

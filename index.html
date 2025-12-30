@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Guru Sampoorna - Pure & Trusted Oils</title>
+    <link rel="icon" href="https://i.postimg.cc/66fG3SzN/Untitled-design.png" type="image/png">
+    <link rel="shortcut icon" href="https://i.postimg.cc/66fG3SzN/Untitled-design.png" type="image/png">
+    <link rel="apple-touch-icon" href="https://i.postimg.cc/66fG3SzN/Untitled-design.png">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-301FER4EFB"></script>
     <script>
@@ -276,7 +279,7 @@
 
         /* --- Main Content Sections --- */
         main {
-            padding: 5px 20px 10px; /* Reduced top padding to 5px */
+            padding: 30px 20px 10px; /* Increased top padding from 5px to 30px for better spacing */
             margin-top: 92px; /* Reduced to sit just below the 90px header block */
             width: 100%;
             overflow-x: hidden; 
@@ -322,15 +325,21 @@
         .about-us {
             position: relative; 
             z-index: 1;
-            padding: 20px 20px 10px 20px; /* Reduced bottom padding */
+            padding: 15px 20px 10px 20px; /* Reduced padding */
             background-color: rgba(255, 250, 240, 0.8); 
             border-radius: 15px;
         }
+        
+        .about-us h2.section-title {
+            margin-bottom: 15px; /* Tighter spacing for this specific section */
+            font-size: 1.8rem;
+        }
+
         .about-us p {
             max-width: 700px;
             margin: 0 auto;
-            line-height: 1.8;
-            font-size: 1rem;
+            line-height: 1.5; /* Compact line height */
+            font-size: 0.9rem; /* Smaller text */
         }
 
         /* --- 3D Background Canvas --- */
@@ -979,6 +988,18 @@
             text-align: center;
         }
         
+        /* Fixed Close Button for Contact Modal */
+        .contact-modal-content .close-modal {
+            color: #555; /* Dark color to be visible on white bg */
+            top: 10px;   /* Position inside the card */
+            right: 15px;
+            font-size: 32px;
+        }
+
+        .contact-modal-content .close-modal:hover {
+            color: #000;
+        }
+        
         .contact-modal-content h3 {
             margin-top: 0;
             margin-bottom: 25px;
@@ -1032,7 +1053,7 @@
             
             /* Maximize space on mobile to fit 2 columns better */
             main {
-                padding: 10px 10px;
+                padding: 20px 10px; /* Increased top padding from 10px to 20px */
                 /* Note: margin-top will cascade from desktop unless overridden */
             }
 
@@ -1081,9 +1102,42 @@
                 padding: 30px 20px;
                 max-height: 85vh;
             }
+            
+            /* --- Team Section Mobile Updates --- */
             .team-container {
-                gap: 20px;
+                gap: 5px; /* Tight gap to fit 3 in a row */
+                flex-wrap: nowrap; /* Force side-by-side */
+                justify-content: space-evenly; /* Distribute evenly */
             }
+
+            .team-member {
+                width: auto;
+                flex: 1; /* Equal width distribution */
+                min-width: 0; /* Allow shrinking */
+                padding: 0 2px;
+            }
+
+            .team-photo {
+                width: 70px; /* Scale down photo */
+                height: 70px;
+                border-width: 3px;
+                margin-bottom: 8px;
+            }
+
+            .team-photo.founder {
+                width: 85px; /* Scale down founder photo */
+                height: 85px;
+            }
+
+            .team-name {
+                font-size: 0.8rem; /* Smaller text */
+                line-height: 1.2;
+            }
+
+            .team-title {
+                font-size: 0.7rem;
+            }
+
             /* WhatsApp Float mobile adjust if needed */
             .whatsapp-float {
                 bottom: 20px;
